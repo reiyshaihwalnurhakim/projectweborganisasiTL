@@ -24,30 +24,30 @@ export default function Sidebar({ userRole }: { userRole: string }) {
   )
 
   return (
-    <div className="hidden md:flex flex-col w-64 bg-white border-r min-h-screen fixed left-0 top-0 bottom-0">
-      <div className="h-16 flex items-center px-6 border-b">
-        <div className="flex items-center gap-2">
-          <div className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center">
-            <span className="text-white font-bold text-sm">SM</span>
+    <div className="hidden md:flex flex-col w-56 bg-[#f7f7f9] border-r border-gray-200 min-h-screen fixed left-0 top-0 bottom-0">
+      <div className="h-14 flex items-center px-5 border-b border-gray-200">
+        <div className="flex items-center gap-2.5">
+          <div className="w-7 h-7 bg-black rounded flex items-center justify-center">
+            <span className="text-white font-bold text-xs tracking-wider">SM</span>
           </div>
-          <span className="font-bold text-gray-900 text-lg">Organisasi</span>
+          <span className="font-semibold text-gray-900 text-[15px] tracking-tight">Organisasi</span>
         </div>
       </div>
 
-      <div className="flex-1 overflow-y-auto py-4 px-3 space-y-1">
+      <div className="flex-1 overflow-y-auto py-4 px-3 space-y-0.5">
         {filteredMenus.map((item) => {
           const isActive = pathname === item.href
           return (
             <Link
               key={item.name}
               href={item.href}
-              className={`flex items-center gap-3 px-3 py-2.5 rounded-lg transition-colors ${
+              className={`flex items-center gap-3 px-3 py-2 rounded-md transition-colors text-sm ${
                 isActive
-                  ? 'bg-blue-50 text-blue-700 font-medium'
-                  : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900'
+                  ? 'bg-white text-black font-medium shadow-sm ring-1 ring-gray-200/50'
+                  : 'text-gray-600 hover:bg-gray-200/50 hover:text-gray-900'
               }`}
             >
-              <item.icon className={`w-5 h-5 ${isActive ? 'text-blue-700' : 'text-gray-400'}`} />
+              <item.icon className={`w-4 h-4 ${isActive ? 'text-black' : 'text-gray-500'}`} />
               {item.name}
             </Link>
           )

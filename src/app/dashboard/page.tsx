@@ -61,44 +61,44 @@ export default async function DashboardHome() {
 
       {/* KPI Cards - Sembunyikan di layar mobile (hanya tampil di layar medium/md ke atas) */}
       <div className="hidden md:grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-        <div className="bg-white p-5 rounded-xl border border-gray-100 shadow-sm flex items-center gap-4 min-w-0">
-          <div className="w-12 h-12 bg-blue-50 text-blue-600 rounded-full flex items-center justify-center shrink-0">
-            <Users className="w-6 h-6" />
+        <div className="bg-white p-4 rounded-xl border border-gray-100 shadow-sm flex items-center gap-3 min-w-0">
+          <div className="w-10 h-10 bg-gray-50 text-gray-700 rounded-lg flex items-center justify-center shrink-0">
+            <Users className="w-5 h-5" />
           </div>
           <div className="min-w-0 flex-1">
-            <p className="text-sm font-medium text-gray-500 truncate">Total Anggota</p>
-            <p className="text-2xl font-bold text-gray-900 truncate">{totalAnggota}</p>
+            <p className="text-xs font-medium text-gray-500 truncate">Total Anggota</p>
+            <p className="text-xl font-bold text-gray-900 truncate">{totalAnggota}</p>
+          </div>
+        </div>
+        
+        <div className="bg-white p-4 rounded-xl border border-gray-100 shadow-sm flex items-center gap-3 min-w-0">
+          <div className="w-10 h-10 bg-gray-50 text-gray-700 rounded-lg flex items-center justify-center shrink-0">
+            <Calendar className="w-5 h-5" />
+          </div>
+          <div className="min-w-0 flex-1">
+            <p className="text-xs font-medium text-gray-500 truncate">Kegiatan Mendatang</p>
+            <p className="text-xl font-bold text-gray-900 truncate">{kegiatanMendatang.length}</p>
           </div>
         </div>
 
-        <div className="bg-white p-5 rounded-xl border border-gray-100 shadow-sm flex items-center gap-4 min-w-0">
-          <div className="w-12 h-12 bg-purple-50 text-purple-600 rounded-full flex items-center justify-center shrink-0">
-            <Calendar className="w-6 h-6" />
+        <div className="bg-white p-4 rounded-xl border border-gray-100 shadow-sm flex items-center gap-3 min-w-0">
+          <div className="w-10 h-10 bg-gray-50 text-gray-700 rounded-lg flex items-center justify-center shrink-0">
+            <CheckCircle className="w-5 h-5" />
           </div>
           <div className="min-w-0 flex-1">
-            <p className="text-sm font-medium text-gray-500 truncate">Kegiatan Mendatang</p>
-            <p className="text-2xl font-bold text-gray-900 truncate">{kegiatanMendatang.length}</p>
-          </div>
-        </div>
-
-        <div className="bg-white p-5 rounded-xl border border-gray-100 shadow-sm flex items-center gap-4 min-w-0">
-          <div className="w-12 h-12 bg-green-50 text-green-600 rounded-full flex items-center justify-center shrink-0">
-            <CheckCircle className="w-6 h-6" />
-          </div>
-          <div className="min-w-0 flex-1">
-            <p className="text-sm font-medium text-gray-500 truncate">Tingkat Kehadiran</p>
-            <p className="text-2xl font-bold text-gray-900 truncate">{attendancePercentage}%</p>
+            <p className="text-xs font-medium text-gray-500 truncate">Tingkat Kehadiran</p>
+            <p className="text-xl font-bold text-gray-900 truncate">{attendancePercentage}%</p>
           </div>
         </div>
 
         {(session?.role === 'admin' || session?.role === 'pengurus') && (
-          <div className="bg-white p-5 rounded-xl border border-gray-100 shadow-sm flex items-center gap-4 min-w-0">
-            <div className="w-12 h-12 bg-yellow-50 text-yellow-600 rounded-full flex items-center justify-center shrink-0">
-              <Wallet className="w-6 h-6" />
+          <div className="bg-white p-4 rounded-xl border border-gray-100 shadow-sm flex items-center gap-3 min-w-0">
+            <div className="w-10 h-10 bg-gray-50 text-gray-700 rounded-lg flex items-center justify-center shrink-0">
+              <Wallet className="w-5 h-5" />
             </div>
             <div className="min-w-0 flex-1">
-              <p className="text-sm font-medium text-gray-500 truncate">Saldo Kas</p>
-              <p className="text-xl sm:text-2xl font-bold text-gray-900 truncate">{formatRupiah(saldo)}</p>
+              <p className="text-xs font-medium text-gray-500 truncate">Saldo Kas</p>
+              <p className="text-lg font-bold text-gray-900 truncate">{formatRupiah(saldo)}</p>
             </div>
           </div>
         )}

@@ -1,8 +1,10 @@
 'use client'
 
+import { useState } from 'react'
 import { formatShortDateId } from '@/lib/utils/date'
 import { updateActivityStatus } from '@/actions/activities.actions'
 import { Calendar, Clock, MapPin, UserSquare2, ChevronRight } from 'lucide-react'
+import ActivityDetailModal from './ActivityDetailModal'
 
 const statusConfig = {
   UPCOMING: { color: 'bg-blue-50 text-blue-700', label: 'Akan Datang' },
@@ -12,9 +14,11 @@ const statusConfig = {
 }
 
 export default function ActivityCard({ activity, canManage }: { activity: any, canManage: boolean }) {
+  const [isDetailOpen, setIsDetailOpen] = useState(false)
   const badge = statusConfig[activity.status as keyof typeof statusConfig]
 
   return (
+    <>
     <div className="bg-white border border-gray-100 rounded-xl shadow-sm hover:shadow-md transition-all flex flex-col h-full">
       {/* Card Header */}
       <div className="p-5 border-b border-gray-50 flex justify-between items-start">
@@ -62,10 +66,17 @@ export default function ActivityCard({ activity, canManage }: { activity: any, c
              <option value="CANCELLED">Batal</option>
            </select>
         ) : <div/>}
-        <button className="text-sm font-medium text-gray-900 hover:text-blue-600 flex items-center gap-1">
+        <button onClick={() => setIsDetailOpen(true)} className="text-sm font-medium text-gray-900 hover:text-blue-600 flex items-center gap-1">
           Detail <ChevronRight className="w-4 h-4" />
         </button>
       </div>
     </div>
+    
+    <ActivityDetailModal 
+      activity={activity} 
+      isOpen={isDetailOpen} 
+      onClose={() => setIsDetailOpen(false)} 
+    />
+    </>
   )
 }

@@ -41,7 +41,7 @@ export default async function DashboardLayout({
       <Sidebar userRole={userData.role} />
 
       {/* Main Content Area */}
-      <div className="flex-1 flex flex-col md:pl-64 min-w-0 transition-all duration-300">
+      <div className="flex-1 flex flex-col md:pl-56 min-w-0 transition-all duration-300">
         <TopNav user={userData} />
         
         <main className="flex-1 p-4 sm:p-6 lg:p-8">
