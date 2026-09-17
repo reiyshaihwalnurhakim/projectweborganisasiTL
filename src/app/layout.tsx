@@ -13,8 +13,12 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Sistem Manajemen Organisasi",
-  description: "Platform Manajemen Organisasi",
+  title: "Paskibra - Sistem Informasi & Manajemen Organisasi",
+  description: "Platform Sistem Informasi & Manajemen Organisasi Paskibra",
+  icons: {
+    icon: "/logo.png",
+    apple: "/logo.png",
+  },
 };
 
 export const viewport: import("next").Viewport = {
@@ -24,10 +28,10 @@ export const viewport: import("next").Viewport = {
   userScalable: false,
 };
 
-export default function RootLayout({ children }: LayoutProps<"/">) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html
-      lang="en"
+      lang="id"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">{children}</body>

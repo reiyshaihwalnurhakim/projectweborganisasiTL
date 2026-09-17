@@ -46,12 +46,12 @@ export default function PositionFormModal({ isOpen, onClose, positions }: { isOp
 
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">Nama Jabatan</label>
-            <input type="text" name="name" required placeholder="Contoh: Kadiv Humas" className="w-full border-gray-300 rounded-lg shadow-sm p-2.5 border text-sm focus:ring-2 focus:ring-blue-500 outline-none text-gray-900" />
+            <input type="text" name="name" required placeholder="Contoh: Kadiv Humas" className="w-full border-gray-300 rounded-lg shadow-sm p-2.5 border text-sm focus:ring-2 focus:ring-red-500 outline-none text-gray-900" />
           </div>
           
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">Induk Jabatan (Di Bawah Posisi)</label>
-            <select name="parentId" className="w-full border-gray-300 rounded-lg shadow-sm p-2.5 border text-sm focus:ring-2 focus:ring-blue-500 outline-none text-gray-900">
+            <select name="parentId" className="w-full border-gray-300 rounded-lg shadow-sm p-2.5 border text-sm focus:ring-2 focus:ring-red-500 outline-none text-gray-900">
               <option value="">-- Paling Atas (Root) --</option>
               {positions.map(p => (
                 <option key={p.id} value={p.id}>{p.name}</option>
@@ -62,11 +62,11 @@ export default function PositionFormModal({ isOpen, onClose, positions }: { isOp
 
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">Deskripsi Singkat (Opsional)</label>
-            <input type="text" name="description" placeholder="Contoh: Bertugas mengelola humas" className="w-full border-gray-300 rounded-lg shadow-sm p-2.5 border text-sm focus:ring-2 focus:ring-blue-500 outline-none text-gray-900" />
+            <input type="text" name="description" placeholder="Contoh: Bertugas mengelola humas" className="w-full border-gray-300 rounded-lg shadow-sm p-2.5 border text-sm focus:ring-2 focus:ring-red-500 outline-none text-gray-900" />
           </div>
           
           <div className="pt-2">
-            <button type="submit" disabled={loading} className="w-full bg-blue-600 text-white rounded-lg py-2.5 font-medium hover:bg-blue-700 transition-colors disabled:opacity-70 flex justify-center items-center gap-2">
+            <button type="submit" disabled={loading} className="w-full bg-red-600 text-white rounded-lg py-2.5 font-medium hover:bg-red-700 transition-colors disabled:opacity-70 flex justify-center items-center gap-2">
               <Send className="w-4 h-4" /> {loading ? 'Menyimpan...' : 'Tambah Jabatan'}
             </button>
           </div>

@@ -21,7 +21,7 @@ export default function StrukturHeader({ isAdmin, positions, users }: { isAdmin:
             <button onClick={() => setIsPositionModalOpen(true)} className="bg-white border border-gray-200 text-gray-700 px-4 py-2 rounded-lg text-sm font-medium hover:bg-gray-50 flex items-center gap-2">
               <Plus className="w-4 h-4" /> Tambah Jabatan
             </button>
-            <button onClick={() => setIsAssignModalOpen(true)} className="bg-blue-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-blue-700 flex items-center gap-2">
+            <button onClick={() => setIsAssignModalOpen(true)} className="bg-red-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-red-700 flex items-center gap-2">
               <Settings className="w-4 h-4" /> Kelola Pejabat
             </button>
           </div>

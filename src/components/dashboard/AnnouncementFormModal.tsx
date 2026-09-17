@@ -46,16 +46,16 @@ export default function AnnouncementFormModal({ isOpen, onClose }: { isOpen: boo
 
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">Judul Pengumuman</label>
-            <input type="text" name="title" required placeholder="Contoh: Jadwal Rapat Dipercepat" className="w-full border-gray-300 rounded-lg shadow-sm p-2.5 border text-sm focus:ring-2 focus:ring-blue-500 outline-none" />
+            <input type="text" name="title" required placeholder="Contoh: Jadwal Rapat Dipercepat" className="w-full border-gray-300 rounded-lg shadow-sm p-2.5 border text-sm focus:ring-2 focus:ring-red-500 outline-none" />
           </div>
 
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">Isi Pesan</label>
-            <textarea name="content" required rows={4} placeholder="Tuliskan pesan Anda di sini..." className="w-full border-gray-300 rounded-lg shadow-sm p-2.5 border text-sm focus:ring-2 focus:ring-blue-500 outline-none resize-none"></textarea>
+            <textarea name="content" required rows={4} placeholder="Tuliskan pesan Anda di sini..." className="w-full border-gray-300 rounded-lg shadow-sm p-2.5 border text-sm focus:ring-2 focus:ring-red-500 outline-none resize-none"></textarea>
           </div>
           
           <div className="pt-2">
-            <button type="submit" disabled={loading} className="w-full bg-blue-600 text-white rounded-lg py-2.5 font-medium hover:bg-blue-700 transition-colors disabled:opacity-70 flex justify-center items-center gap-2">
+            <button type="submit" disabled={loading} className="w-full bg-red-600 text-white rounded-lg py-2.5 font-medium hover:bg-red-700 transition-colors disabled:opacity-70 flex justify-center items-center gap-2">
               <Send className="w-4 h-4" /> {loading ? 'Mengirim...' : 'Publikasikan'}
             </button>
           </div>

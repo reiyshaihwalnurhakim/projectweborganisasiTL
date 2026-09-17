@@ -14,7 +14,7 @@ export default function AnggotaHeader() {
           <h1 className="text-2xl font-bold text-gray-900">Manajemen Anggota</h1>
           <p className="text-sm text-gray-500 mt-1">Kelola data, role, dan akses anggota sistem.</p>
         </div>
-        <button onClick={() => setIsModalOpen(true)} className="bg-blue-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-blue-700 flex items-center gap-2">
+        <button onClick={() => setIsModalOpen(true)} className="bg-red-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-red-700 flex items-center gap-2">
           <UserPlus className="w-4 h-4" /> Tambah Anggota
         </button>
       </div>

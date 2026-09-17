@@ -19,7 +19,7 @@ export default function FinanceHeader({ canManage }: { canManage: boolean }) {
             <a href="/api/export?type=keuangan" className="bg-white border border-gray-200 text-gray-700 px-4 py-2 rounded-lg text-sm font-medium hover:bg-gray-50 flex items-center gap-2">
               <FileText className="w-4 h-4" /> Laporan
             </a>
-            <button onClick={() => setIsModalOpen(true)} className="bg-blue-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-blue-700 flex items-center gap-2">
+            <button onClick={() => setIsModalOpen(true)} className="bg-red-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-red-700 flex items-center gap-2">
               <Plus className="w-4 h-4" /> Catat Transaksi
             </button>
           </div>

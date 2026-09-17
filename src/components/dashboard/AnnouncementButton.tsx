@@ -8,7 +8,7 @@ export default function AnnouncementButton() {
 
   return (
     <>
-      <button onClick={() => setIsModalOpen(true)} className="text-sm text-blue-600 font-medium hover:underline px-3 py-1.5 rounded-lg hover:bg-blue-50 transition-colors">
+      <button onClick={() => setIsModalOpen(true)} className="text-sm text-red-600 font-medium hover:underline px-3 py-1.5 rounded-lg hover:bg-red-50 transition-colors">
         + Tulis Pengumuman
       </button>
       

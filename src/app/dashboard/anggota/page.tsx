@@ -26,7 +26,7 @@ export default async function AnggotaPage({ searchParams }: { searchParams: { q?
                 name="q"
                 defaultValue={query}
                 placeholder="Cari nama atau username..." 
-                className="w-full pl-9 pr-4 py-2 border rounded-lg text-sm focus:ring-2 focus:ring-blue-500 outline-none text-gray-900"
+                className="w-full pl-9 pr-4 py-2 border rounded-lg text-sm focus:ring-2 focus:ring-red-500 outline-none text-gray-900"
               />
             </form>
           </div>

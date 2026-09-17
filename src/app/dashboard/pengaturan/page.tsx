@@ -23,7 +23,7 @@ export default async function PengaturanPage() {
 
       <div className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
         <div className="p-6 border-b border-gray-100 bg-gray-50 flex items-center gap-4">
-           <div className="w-16 h-16 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center">
+           <div className="w-16 h-16 bg-red-100 text-red-600 rounded-full flex items-center justify-center">
               <UserCircle className="w-10 h-10" />
            </div>
            <div>

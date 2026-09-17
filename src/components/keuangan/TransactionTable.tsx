@@ -17,7 +17,7 @@ export default function TransactionTable({ transactions, currentFilter, canManag
           <button 
             key={f}
             onClick={() => router.push(`?type=${f}`)}
-            className={`px-3 py-1.5 text-xs font-medium rounded-md ${currentFilter === f ? 'bg-blue-50 text-blue-700' : 'text-gray-500 hover:bg-gray-50'}`}
+            className={`px-3 py-1.5 text-xs font-medium rounded-md ${currentFilter === f ? 'bg-red-50 text-red-700' : 'text-gray-500 hover:bg-gray-50'}`}
           >
             {f === 'ALL' ? 'Semua Transaksi' : f === 'INCOME' ? 'Pemasukan' : 'Pengeluaran'}
           </button>

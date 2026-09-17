@@ -82,12 +82,12 @@ export default function ActivityDetailModal({
                   value={evalText}
                   onChange={(e) => setEvalText(e.target.value)}
                   placeholder="Tuliskan hasil evaluasi, kendala, atau saran perbaikan untuk kegiatan serupa di masa depan..."
-                  className="w-full border-gray-300 rounded-lg shadow-sm p-3 border text-sm focus:ring-2 focus:ring-blue-500 outline-none text-gray-900 resize-none"
+                  className="w-full border-gray-300 rounded-lg shadow-sm p-3 border text-sm focus:ring-2 focus:ring-red-500 outline-none text-gray-900 resize-none"
                 />
                 <button 
                   onClick={handleSaveEval}
                   disabled={isSaving}
-                  className="px-4 py-2 bg-blue-600 text-white rounded-lg text-sm font-medium hover:bg-blue-700 transition-colors disabled:opacity-50 flex items-center gap-2"
+                  className="px-4 py-2 bg-red-600 text-white rounded-lg text-sm font-medium hover:bg-red-700 transition-colors disabled:opacity-50 flex items-center gap-2"
                 >
                   <Send className="w-4 h-4" /> {isSaving ? 'Menyimpan...' : 'Simpan Evaluasi'}
                 </button>

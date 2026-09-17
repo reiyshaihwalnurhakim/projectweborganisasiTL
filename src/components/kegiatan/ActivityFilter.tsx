@@ -28,7 +28,7 @@ export default function ActivityFilter({ currentStatus, currentSearch }: { curre
         <select 
           value={currentStatus || 'ALL'}
           onChange={(e) => updateFilter('status', e.target.value === 'ALL' ? '' : e.target.value)}
-          className="w-full border-gray-300 text-gray-900 rounded-lg shadow-sm focus:border-blue-500 focus:ring-blue-500 p-2.5 border outline-none text-sm font-medium"
+          className="w-full border-gray-300 text-gray-900 rounded-lg shadow-sm focus:border-red-500 focus:ring-red-500 p-2.5 border outline-none text-sm font-medium"
         >
           {statusOptions.map(opt => (
             <option key={opt.id} value={opt.id}>{opt.label}</option>
@@ -42,7 +42,7 @@ export default function ActivityFilter({ currentStatus, currentSearch }: { curre
           defaultValue={currentSearch}
           onChange={(e) => updateFilter('q', e.target.value)}
           placeholder="Cari nama acara..." 
-          className="w-full pl-9 pr-4 py-2.5 bg-gray-50 border-gray-200 border rounded-lg text-sm focus:ring-2 focus:ring-blue-500 outline-none text-gray-900"
+          className="w-full pl-9 pr-4 py-2.5 bg-gray-50 border-gray-200 border rounded-lg text-sm focus:ring-2 focus:ring-red-500 outline-none text-gray-900"
         />
       </div>
     </div>

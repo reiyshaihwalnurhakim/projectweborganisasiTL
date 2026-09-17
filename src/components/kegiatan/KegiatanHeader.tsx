@@ -15,7 +15,7 @@ export default function KegiatanHeader({ canManage }: { canManage: boolean }) {
           <p className="text-sm text-gray-500 mt-1">Daftar agenda dan acara organisasi.</p>
         </div>
         {canManage && (
-          <button onClick={() => setIsModalOpen(true)} className="bg-blue-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-blue-700 flex items-center gap-2">
+          <button onClick={() => setIsModalOpen(true)} className="bg-red-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-red-700 flex items-center gap-2">
             <CalendarPlus className="w-4 h-4" /> Tambah Acara
           </button>
         )}

@@ -26,7 +26,7 @@ export default function AdminAttendanceView({ activities, selectedActivityId, at
       <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-5">
         <label className="block text-sm font-medium text-gray-700 mb-2">Pilih Kegiatan</label>
         <select 
-          className="w-full sm:w-96 border-gray-300 text-gray-900 rounded-lg shadow-sm focus:border-blue-500 focus:ring-blue-500 p-2 border outline-none"
+          className="w-full sm:w-96 border-gray-300 text-gray-900 rounded-lg shadow-sm focus:border-red-500 focus:ring-red-500 p-2 border outline-none"
           value={selectedActivityId || ''}
           onChange={(e) => router.push(`?activityId=${e.target.value}`)}
         >
@@ -47,7 +47,7 @@ export default function AdminAttendanceView({ activities, selectedActivityId, at
                <a 
                  href={`/dashboard/absensi/qr/${selectedActivityId}`} 
                  target="_blank" 
-                 className="bg-blue-600 text-white px-5 py-2.5 rounded-lg text-sm font-medium hover:bg-blue-700 flex items-center gap-2 shadow-sm"
+                 className="bg-red-600 text-white px-5 py-2.5 rounded-lg text-sm font-medium hover:bg-red-700 flex items-center gap-2 shadow-sm"
                >
                  <QrCode className="w-4 h-4" /> Tampilkan Proyektor QR
                </a>
@@ -73,7 +73,7 @@ export default function AdminAttendanceView({ activities, selectedActivityId, at
                                  <span className={`px-2 py-1 rounded text-xs font-semibold ${
                                     att.status === 'HADIR' ? 'bg-green-100 text-green-700' :
                                     att.status === 'IZIN' ? 'bg-yellow-100 text-yellow-700' :
-                                    att.status === 'SAKIT' ? 'bg-blue-100 text-blue-700' :
+                                    att.status === 'SAKIT' ? 'bg-red-100 text-red-700' :
                                     'bg-red-100 text-red-700'
                                  }`}>
                                     {att.status}

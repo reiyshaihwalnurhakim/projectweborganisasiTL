@@ -36,7 +36,7 @@ export default function ProfileForm({ user }: { user: any }) {
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-1">Nama Lengkap</label>
-          <input type="text" name="nama" defaultValue={user.nama} required className="w-full border-gray-300 rounded-lg shadow-sm p-2.5 border text-sm focus:ring-2 focus:ring-blue-500 outline-none" />
+          <input type="text" name="nama" defaultValue={user.nama} required className="w-full border-gray-300 rounded-lg shadow-sm p-2.5 border text-sm focus:ring-2 focus:ring-red-500 outline-none" />
         </div>
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-1">Username (Tidak bisa diubah)</label>
@@ -44,11 +44,11 @@ export default function ProfileForm({ user }: { user: any }) {
         </div>
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-1">No. Telepon</label>
-          <input type="text" name="no_telepon" defaultValue={user.no_telepon || ''} className="w-full border-gray-300 rounded-lg shadow-sm p-2.5 border text-sm focus:ring-2 focus:ring-blue-500 outline-none" />
+          <input type="text" name="no_telepon" defaultValue={user.no_telepon || ''} className="w-full border-gray-300 rounded-lg shadow-sm p-2.5 border text-sm focus:ring-2 focus:ring-red-500 outline-none" />
         </div>
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-1">Email</label>
-          <input type="email" name="email" defaultValue={user.email || ''} className="w-full border-gray-300 rounded-lg shadow-sm p-2.5 border text-sm focus:ring-2 focus:ring-blue-500 outline-none" />
+          <input type="email" name="email" defaultValue={user.email || ''} className="w-full border-gray-300 rounded-lg shadow-sm p-2.5 border text-sm focus:ring-2 focus:ring-red-500 outline-none" />
         </div>
       </div>
 
@@ -56,12 +56,12 @@ export default function ProfileForm({ user }: { user: any }) {
         <h3 className="font-semibold text-gray-900 mb-4">Ganti Kata Sandi</h3>
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-1">Kata Sandi Baru</label>
-          <input type="password" name="newPassword" placeholder="Kosongkan jika tidak ingin mengubah sandi" className="w-full border-gray-300 rounded-lg shadow-sm p-2.5 border text-sm focus:ring-2 focus:ring-blue-500 outline-none" />
+          <input type="password" name="newPassword" placeholder="Kosongkan jika tidak ingin mengubah sandi" className="w-full border-gray-300 rounded-lg shadow-sm p-2.5 border text-sm focus:ring-2 focus:ring-red-500 outline-none" />
         </div>
       </div>
 
       <div className="pt-4 flex justify-end">
-        <button type="submit" disabled={loading} className="bg-blue-600 text-white px-6 py-2.5 rounded-lg text-sm font-medium hover:bg-blue-700 transition-colors disabled:opacity-70">
+        <button type="submit" disabled={loading} className="bg-red-600 text-white px-6 py-2.5 rounded-lg text-sm font-medium hover:bg-red-700 transition-colors disabled:opacity-70">
           {loading ? 'Menyimpan...' : 'Simpan Perubahan'}
         </button>
       </div>

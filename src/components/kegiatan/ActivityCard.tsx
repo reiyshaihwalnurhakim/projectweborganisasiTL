@@ -7,7 +7,7 @@ import { Calendar, Clock, MapPin, UserSquare2, ChevronRight } from 'lucide-react
 import ActivityDetailModal from './ActivityDetailModal'
 
 const statusConfig = {
-  UPCOMING: { color: 'bg-blue-50 text-blue-700', label: 'Akan Datang' },
+  UPCOMING: { color: 'bg-red-50 text-red-700', label: 'Akan Datang' },
   ONGOING: { color: 'bg-green-50 text-green-700', label: 'Sedang Berlangsung' },
   COMPLETED: { color: 'bg-gray-100 text-gray-600', label: 'Selesai' },
   CANCELLED: { color: 'bg-red-50 text-red-700', label: 'Dibatalkan' },
@@ -54,7 +54,7 @@ export default function ActivityCard({ activity, canManage }: { activity: any, c
       <div className="p-4 bg-gray-50 rounded-b-xl flex justify-between items-center">
         {canManage ? (
            <select 
-             className="text-xs font-medium bg-white border border-gray-200 rounded px-2 py-1 outline-none text-gray-700 cursor-pointer hover:border-blue-400"
+             className="text-xs font-medium bg-white border border-gray-200 rounded px-2 py-1 outline-none text-gray-700 cursor-pointer hover:border-red-400"
              defaultValue={activity.status}
              onChange={async (e) => {
                 await updateActivityStatus(activity.id, e.target.value)
@@ -66,7 +66,7 @@ export default function ActivityCard({ activity, canManage }: { activity: any, c
              <option value="CANCELLED">Batal</option>
            </select>
         ) : <div/>}
-        <button onClick={() => setIsDetailOpen(true)} className="text-sm font-medium text-gray-900 hover:text-blue-600 flex items-center gap-1">
+        <button onClick={() => setIsDetailOpen(true)} className="text-sm font-medium text-gray-900 hover:text-red-600 flex items-center gap-1">
           Detail <ChevronRight className="w-4 h-4" />
         </button>
       </div>

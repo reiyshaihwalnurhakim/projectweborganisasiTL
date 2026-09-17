@@ -26,10 +26,10 @@ export default async function KeuanganPage(props: { searchParams: Promise<{ type
       <FinanceHeader canManage={canManage} />
 
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-        <div className="bg-blue-600 p-5 rounded-xl shadow-sm text-white">
+        <div className="bg-red-600 p-5 rounded-xl shadow-sm text-white">
           <div className="flex justify-between items-start">
-            <p className="text-blue-100 font-medium">Saldo Kas Saat Ini</p>
-            <Wallet className="w-5 h-5 text-blue-200" />
+            <p className="text-red-100 font-medium">Saldo Kas Saat Ini</p>
+            <Wallet className="w-5 h-5 text-red-200" />
           </div>
           <p className="text-3xl font-bold mt-2">{formatRupiah(summary.balance)}</p>
         </div>

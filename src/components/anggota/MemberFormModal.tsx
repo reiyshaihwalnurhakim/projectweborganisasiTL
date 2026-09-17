@@ -46,28 +46,28 @@ export default function MemberFormModal({ isOpen, onClose }: { isOpen: boolean, 
 
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">Nama Lengkap</label>
-            <input type="text" name="nama" required placeholder="Budi Santoso" className="w-full border-gray-300 rounded-lg shadow-sm p-2.5 border text-sm focus:ring-2 focus:ring-blue-500 outline-none" />
+            <input type="text" name="nama" required placeholder="Budi Santoso" className="w-full border-gray-300 rounded-lg shadow-sm p-2.5 border text-sm focus:ring-2 focus:ring-red-500 outline-none" />
           </div>
 
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">Username (Unik)</label>
-            <input type="text" name="username" required placeholder="budis" className="w-full border-gray-300 rounded-lg shadow-sm p-2.5 border text-sm focus:ring-2 focus:ring-blue-500 outline-none" />
+            <input type="text" name="username" required placeholder="budis" className="w-full border-gray-300 rounded-lg shadow-sm p-2.5 border text-sm focus:ring-2 focus:ring-red-500 outline-none" />
           </div>
           
           <div className="grid grid-cols-2 gap-4">
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">No. Telepon</label>
-              <input type="text" name="no_telepon" placeholder="0812345678" className="w-full border-gray-300 rounded-lg shadow-sm p-2.5 border text-sm focus:ring-2 focus:ring-blue-500 outline-none" />
+              <input type="text" name="no_telepon" placeholder="0812345678" className="w-full border-gray-300 rounded-lg shadow-sm p-2.5 border text-sm focus:ring-2 focus:ring-red-500 outline-none" />
             </div>
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">Email</label>
-              <input type="email" name="email" placeholder="budi@email.com" className="w-full border-gray-300 rounded-lg shadow-sm p-2.5 border text-sm focus:ring-2 focus:ring-blue-500 outline-none" />
+              <input type="email" name="email" placeholder="budi@email.com" className="w-full border-gray-300 rounded-lg shadow-sm p-2.5 border text-sm focus:ring-2 focus:ring-red-500 outline-none" />
             </div>
           </div>
 
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">Role Akses</label>
-            <select name="roleName" required className="w-full border-gray-300 rounded-lg shadow-sm p-2.5 border text-sm focus:ring-2 focus:ring-blue-500 outline-none">
+            <select name="roleName" required className="w-full border-gray-300 rounded-lg shadow-sm p-2.5 border text-sm focus:ring-2 focus:ring-red-500 outline-none">
               <option value="anggota">Anggota Biasa</option>
               <option value="pengurus">Pengurus</option>
               <option value="admin">Admin</option>
@@ -76,12 +76,12 @@ export default function MemberFormModal({ isOpen, onClose }: { isOpen: boolean, 
 
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">Password Sementara</label>
-            <input type="text" name="password" required defaultValue="password123" className="w-full border-gray-300 rounded-lg shadow-sm p-2.5 border text-sm focus:ring-2 focus:ring-blue-500 outline-none font-mono bg-gray-50" />
+            <input type="text" name="password" required defaultValue="password123" className="w-full border-gray-300 rounded-lg shadow-sm p-2.5 border text-sm focus:ring-2 focus:ring-red-500 outline-none font-mono bg-gray-50" />
             <p className="text-xs text-gray-500 mt-1">Gunakan password ini untuk login pertama kali.</p>
           </div>
 
           <div className="pt-2">
-            <button type="submit" disabled={loading} className="w-full bg-blue-600 text-white rounded-lg py-2.5 font-medium hover:bg-blue-700 transition-colors disabled:opacity-70 flex justify-center items-center">
+            <button type="submit" disabled={loading} className="w-full bg-red-600 text-white rounded-lg py-2.5 font-medium hover:bg-red-700 transition-colors disabled:opacity-70 flex justify-center items-center">
               {loading ? 'Menyimpan...' : 'Tambahkan Anggota'}
             </button>
           </div>

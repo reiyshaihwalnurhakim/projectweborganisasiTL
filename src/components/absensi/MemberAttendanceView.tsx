@@ -13,12 +13,12 @@ export default function MemberAttendanceView({ ongoingActivities, history }: { o
         <p className="text-sm text-gray-500 mt-1">Catat absensi kegiatan dan pantau riwayat kehadiran Anda.</p>
       </div>
 
-      <div className="bg-blue-600 text-white rounded-2xl p-6 shadow-sm flex flex-col sm:flex-row items-center justify-between gap-6">
+      <div className="bg-red-600 text-white rounded-2xl p-6 shadow-sm flex flex-col sm:flex-row items-center justify-between gap-6">
          <div>
             <h2 className="text-xl font-bold mb-2">Absensi Cepat via QR Code</h2>
-            <p className="text-blue-100 text-sm max-w-md">Kini Anda bisa melakukan check-in instan dengan men-scan QR Code yang ditampilkan di layar proyektor kegiatan.</p>
+            <p className="text-red-100 text-sm max-w-md">Kini Anda bisa melakukan check-in instan dengan men-scan QR Code yang ditampilkan di layar proyektor kegiatan.</p>
          </div>
-         <Link href="/dashboard/absensi/scan" className="bg-white text-blue-600 px-6 py-3 rounded-xl font-bold flex items-center gap-2 hover:bg-blue-50 transition-colors shrink-0 shadow-sm">
+         <Link href="/dashboard/absensi/scan" className="bg-white text-red-600 px-6 py-3 rounded-xl font-bold flex items-center gap-2 hover:bg-red-50 transition-colors shrink-0 shadow-sm">
             <QrCode className="w-5 h-5" /> Buka Kamera Scanner
          </Link>
       </div>
@@ -55,7 +55,7 @@ export default function MemberAttendanceView({ ongoingActivities, history }: { o
                          const status = formData.get('status') as string
                          await submitAttendance(activity.id, status)
                       }}>
-                        <button type="submit" name="status" value="HADIR" className="bg-blue-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-blue-700">
+                        <button type="submit" name="status" value="HADIR" className="bg-red-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-red-700">
                           Hadir
                         </button>
                         <button type="submit" name="status" value="IZIN" className="bg-yellow-50 text-yellow-700 px-4 py-2 rounded-lg text-sm font-medium hover:bg-yellow-100">

@@ -35,8 +35,8 @@ export default function AnggotaTable({ members }: { members: any[] }) {
     <div>
       {/* Bulk Action Toolbar */}
       {selectedIds.length > 0 && (
-        <div className="bg-blue-50 border-b border-blue-100 p-3 flex justify-between items-center animate-in fade-in slide-in-from-top-2">
-          <span className="text-sm text-blue-800 font-medium">{selectedIds.length} anggota terpilih</span>
+        <div className="bg-red-50 border-b border-red-100 p-3 flex justify-between items-center animate-in fade-in slide-in-from-top-2">
+          <span className="text-sm text-red-800 font-medium">{selectedIds.length} anggota terpilih</span>
           <div className="flex gap-2 items-center">
             <span className="text-xs text-gray-500 mr-2">Ubah Status Menjadi:</span>
             <button disabled={isUpdating} onClick={() => handleBulkUpdate('aktif')} className="px-3 py-1 bg-green-600 text-white text-xs font-medium rounded hover:bg-green-700 disabled:opacity-50">Aktif</button>
@@ -53,7 +53,7 @@ export default function AnggotaTable({ members }: { members: any[] }) {
               <th className="px-4 py-3 w-12 text-center">
                 <button onClick={toggleSelectAll} className="text-gray-400 hover:text-gray-600">
                   {selectedIds.length === members.length && members.length > 0 ? (
-                    <CheckSquare className="w-5 h-5 text-blue-600" />
+                    <CheckSquare className="w-5 h-5 text-red-600" />
                   ) : (
                     <Square className="w-5 h-5" />
                   )}
@@ -67,11 +67,11 @@ export default function AnggotaTable({ members }: { members: any[] }) {
           </thead>
           <tbody className="divide-y divide-gray-100">
             {members.map(member => (
-              <tr key={member.id} className={`hover:bg-gray-50 ${selectedIds.includes(member.id) ? 'bg-blue-50/30' : ''}`}>
+              <tr key={member.id} className={`hover:bg-gray-50 ${selectedIds.includes(member.id) ? 'bg-red-50/30' : ''}`}>
                 <td className="px-4 py-4 text-center">
                   <button onClick={() => toggleSelect(member.id)} className="text-gray-400 hover:text-gray-600">
                     {selectedIds.includes(member.id) ? (
-                      <CheckSquare className="w-5 h-5 text-blue-600" />
+                      <CheckSquare className="w-5 h-5 text-red-600" />
                     ) : (
                       <Square className="w-5 h-5" />
                     )}

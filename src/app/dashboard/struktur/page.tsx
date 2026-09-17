@@ -12,16 +12,16 @@ function OrgNode({ node }: { node: any }) {
 
   return (
     <div className="flex flex-col items-center">
-      <div className={`relative bg-white border ${isKetua ? 'border-blue-500 shadow-md ring-1 ring-blue-500/20' : 'border-gray-200 shadow-sm'} rounded-xl p-3 w-48 text-center z-10`}>
+      <div className={`relative bg-white border ${isKetua ? 'border-red-500 shadow-md ring-1 ring-red-500/20' : 'border-gray-200 shadow-sm'} rounded-xl p-3 w-48 text-center z-10`}>
         <div className="text-[10px] font-bold text-gray-500 uppercase tracking-wider mb-1.5 line-clamp-2">{node.name}</div>
         
         {currentMember ? (
           <div className="flex flex-col items-center">
-            <div className="w-8 h-8 bg-blue-50 rounded-full flex items-center justify-center mb-1.5 text-blue-600 border border-blue-100">
+            <div className="w-8 h-8 bg-red-50 rounded-full flex items-center justify-center mb-1.5 text-red-600 border border-red-100">
               <User className="w-4 h-4" />
             </div>
             <div className="text-sm font-semibold text-gray-900 truncate w-full">{currentMember.user.nama}</div>
-            <div className="text-[10px] text-blue-600 mt-1 font-medium bg-blue-50/50 px-2 py-0.5 rounded-full border border-blue-100/50">
+            <div className="text-[10px] text-red-600 mt-1 font-medium bg-red-50/50 px-2 py-0.5 rounded-full border border-red-100/50">
               Periode {currentMember.period}
             </div>
           </div>

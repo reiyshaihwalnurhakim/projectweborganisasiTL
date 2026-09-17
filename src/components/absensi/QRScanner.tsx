@@ -146,7 +146,7 @@ export default function QRScanner() {
           <div className="p-4">
             <div id="reader" className="w-full"></div>
             {loading && (
-              <div className="mt-4 text-center text-blue-600 font-medium animate-pulse">
+              <div className="mt-4 text-center text-red-600 font-medium animate-pulse">
                 Memproses data absensi...
               </div>
             )}

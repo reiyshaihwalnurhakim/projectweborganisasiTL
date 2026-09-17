@@ -69,29 +69,29 @@ export default function TransactionFormModal({ isOpen, onClose }: { isOpen: bool
 
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">Tanggal Transaksi</label>
-            <input type="date" name="transactionDate" required defaultValue={new Date().toISOString().split('T')[0]} className="w-full border-gray-300 rounded-lg shadow-sm p-2.5 border text-sm focus:ring-2 focus:ring-blue-500 outline-none" />
+            <input type="date" name="transactionDate" required defaultValue={new Date().toISOString().split('T')[0]} className="w-full border-gray-300 rounded-lg shadow-sm p-2.5 border text-sm focus:ring-2 focus:ring-red-500 outline-none" />
           </div>
 
           <div className="flex gap-4">
             <div className="flex-1">
               <label className="block text-sm font-medium text-gray-700 mb-1">Kategori</label>
-              <select name="category" required className="w-full border-gray-300 rounded-lg shadow-sm p-2.5 border text-sm focus:ring-2 focus:ring-blue-500 outline-none">
+              <select name="category" required className="w-full border-gray-300 rounded-lg shadow-sm p-2.5 border text-sm focus:ring-2 focus:ring-red-500 outline-none">
                 {categories.map(c => <option key={c} value={c}>{c}</option>)}
               </select>
             </div>
             <div className="flex-1">
               <label className="block text-sm font-medium text-gray-700 mb-1">Nominal (Rp)</label>
-              <input type="number" name="amount" min="1" required placeholder="0" className="w-full border-gray-300 rounded-lg shadow-sm p-2.5 border text-sm focus:ring-2 focus:ring-blue-500 outline-none font-mono" />
+              <input type="number" name="amount" min="1" required placeholder="0" className="w-full border-gray-300 rounded-lg shadow-sm p-2.5 border text-sm focus:ring-2 focus:ring-red-500 outline-none font-mono" />
             </div>
           </div>
 
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">Keterangan / Deskripsi</label>
-            <textarea name="description" required rows={3} placeholder="Contoh: Pembelian tinta printer" className="w-full border-gray-300 rounded-lg shadow-sm p-2.5 border text-sm focus:ring-2 focus:ring-blue-500 outline-none resize-none"></textarea>
+            <textarea name="description" required rows={3} placeholder="Contoh: Pembelian tinta printer" className="w-full border-gray-300 rounded-lg shadow-sm p-2.5 border text-sm focus:ring-2 focus:ring-red-500 outline-none resize-none"></textarea>
           </div>
 
           <div className="pt-2">
-            <button type="submit" disabled={loading} className="w-full bg-blue-600 text-white rounded-lg py-2.5 font-medium hover:bg-blue-700 transition-colors disabled:opacity-70 flex justify-center items-center">
+            <button type="submit" disabled={loading} className="w-full bg-red-600 text-white rounded-lg py-2.5 font-medium hover:bg-red-700 transition-colors disabled:opacity-70 flex justify-center items-center">
               {loading ? 'Menyimpan...' : 'Simpan Transaksi'}
             </button>
           </div>
