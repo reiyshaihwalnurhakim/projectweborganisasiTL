@@ -38,6 +38,7 @@ model User {
   attendances         Attendance[]
   createdTransactions Transaction[]      @relation("TransactionCreator")
   auditLogs           AuditLog[]
+  announcements       Announcement[]
 
   @@map("users")
 }
@@ -173,3 +174,14 @@ model Transaction {
 
   @@map("transactions")
 }
+
+model Announcement {
+  id        String   @id @default(cuid())
+  title     String
+  content   String
+  createdAt DateTime @default(now())
+  authorId  String
+  author    User     @relation(fields: [authorId], references: [id])
+  @@map("announcements")
+}
+
