@@ -43,10 +43,14 @@ export default async function DashboardHome() {
     ? Math.round((totalHadir / myAttendances.length) * 100) 
     : 0
 
+  const user = await prisma.user.findUnique({
+    where: { id: session?.userId }
+  })
+
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-2xl font-bold text-gray-900">Selamat Datang, {session?.nama} 👋</h1>
+        <h1 className="text-2xl font-bold text-gray-900">Selamat Datang, {user?.nama || session?.username} 👋</h1>
         <p className="text-sm text-gray-500 mt-1">Ini adalah ringkasan informasi organisasi Anda hari ini.</p>
       </div>
 

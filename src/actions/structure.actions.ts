@@ -35,32 +35,36 @@ export async function getOrganizationTree() {
   return tree
 }
 
-export async function assignMemberToPosition(formData: FormData) {
-  const session = await getSession()
-  if (session?.role !== 'admin') throw new Error('Unauthorized')
+export async function assignMemberToPosition(formData: FormData): Promise<{success?: boolean; error?: string}> {
+  try {
+    const session = await getSession()
+    if (session?.role !== 'admin') throw new Error('Unauthorized')
 
-  const positionId = formData.get('positionId') as string
-  const userId = formData.get('userId') as string
-  const period = formData.get('period') as string
+    const positionId = formData.get('positionId') as string
+    const userId = formData.get('userId') as string
+    const period = formData.get('period') as string
 
-  // Nonaktifkan pejabat sebelumnya
-  await prisma.organizationMember.updateMany({
-    where: { positionId, isCurrent: true },
-    data: { isCurrent: false }
-  })
-
-  // Tetapkan pejabat baru
-  if (userId) {
-    await prisma.organizationMember.create({
-      data: {
-        userId,
-        positionId,
-        period,
-        isCurrent: true
-      }
+    // Nonaktifkan pejabat sebelumnya
+    await prisma.organizationMember.updateMany({
+      where: { positionId, isCurrent: true },
+      data: { isCurrent: false }
     })
-  }
 
-  revalidatePath('/dashboard/struktur')
-  return { success: true }
+    // Tetapkan pejabat baru
+    if (userId) {
+      await prisma.organizationMember.create({
+        data: {
+          userId,
+          positionId,
+          period,
+          isCurrent: true
+        }
+      })
+    }
+
+    revalidatePath('/dashboard/struktur')
+    return { success: true }
+  } catch (err: any) {
+    return { error: err.message || 'Gagal mengubah struktur' }
+  }
 }
