@@ -1,0 +1,175 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+model Role {
+  id          String   @id @default(cuid())
+  name        String   @unique
+  description String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  users       User[]
+
+  @@map("roles")
+}
+
+model User {
+  id            String   @id @default(cuid())
+  username      String   @unique
+  password_hash String
+  nama          String
+  email         String?  @unique
+  no_telepon    String?
+  foto          String?
+  status        String   @default("active") // 'active' atau 'inactive'
+  roleId        String
+  role          Role     @relation(fields: [roleId], references: [id])
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  organizationMembers OrganizationMember[]
+  createdActivities   Activity[]         @relation("ActivityCreator")
+  attendances         Attendance[]
+  createdTransactions Transaction[]      @relation("TransactionCreator")
+  auditLogs           AuditLog[]
+
+  @@map("users")
+}
+
+enum ActivityStatus {
+  UPCOMING
+  ONGOING
+  COMPLETED
+  CANCELLED
+}
+
+model Activity {
+  id             String         @id @default(cuid())
+  title          String
+  description    String
+  date           DateTime
+  startTime      String
+  endTime        String
+  location       String
+  personInCharge String
+  status         ActivityStatus @default(UPCOMING)
+  createdBy      String
+  creator        User           @relation("ActivityCreator", fields: [createdBy], references: [id])
+  createdAt      DateTime       @default(now())
+  updatedAt      DateTime       @updatedAt
+
+  qrToken        String?
+  qrExpiresAt    DateTime?
+
+  attendances    Attendance[]
+  @@map("activities")
+}
+
+model AuditLog {
+  id        String   @id @default(cuid())
+  userId    String?
+  action    String
+  entity    String
+  entityId  String?
+  details   String?
+  ipAddress String?
+  userAgent String?
+  createdAt DateTime @default(now())
+
+  user User? @relation(fields: [userId], references: [id])
+  @@map("audit_logs")
+}
+
+enum AttendanceStatus {
+  HADIR
+  IZIN
+  SAKIT
+  ALPA
+}
+
+model Attendance {
+  id         String           @id @default(cuid())
+  userId     String
+  activityId String
+  status     AttendanceStatus @default(ALPA)
+  checkInAt  DateTime?
+  note       String?
+  createdAt  DateTime         @default(now())
+  updatedAt  DateTime         @updatedAt
+
+  user       User     @relation(fields: [userId], references: [id])
+  activity   Activity @relation(fields: [activityId], references: [id])
+
+  @@unique([userId, activityId])
+  @@map("attendances")
+}
+
+model Position {
+  id          String     @id @default(cuid())
+  name        String
+  description String?
+  order       Int        @default(0)
+  parentId    String?
+  parent      Position?  @relation("PositionHierarchy", fields: [parentId], references: [id])
+  children    Position[] @relation("PositionHierarchy")
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+
+  organizationMembers OrganizationMember[]
+
+  @@map("positions")
+}
+
+model OrganizationMember {
+  id         String   @id @default(cuid())
+  userId     String
+  positionId String
+  period     String   // e.g., "2026/2027"
+  isCurrent  Boolean  @default(true)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  user       User     @relation(fields: [userId], references: [id])
+  position   Position @relation(fields: [positionId], references: [id])
+
+  @@map("organization_members")
+}
+
+enum TransactionType {
+  INCOME
+  EXPENSE
+}
+
+enum TransactionCategory {
+  IURAN
+  DONASI
+  SPONSORSHIP
+  KEGIATAN
+  OPERASIONAL
+  KONSUMSI
+  PERALATAN
+  TRANSPORTASI
+  LAINNYA
+}
+
+model Transaction {
+  id              String              @id @default(cuid())
+  type            TransactionType
+  category        TransactionCategory
+  amount          Decimal
+  description     String
+  transactionDate DateTime
+  attachment      String?
+  createdBy       String
+  creator         User                @relation("TransactionCreator", fields: [createdBy], references: [id])
+  createdAt       DateTime            @default(now())
+  updatedAt       DateTime            @updatedAt
+
+  @@map("transactions")
+}
