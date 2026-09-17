@@ -78,13 +78,10 @@ export default async function StrukturPage() {
               <OrgNode key={rootNode.id} node={rootNode} />
             ))}
 
-            {/* Garis penghubung ke Node Anggota */}
-            <div className="w-px h-8 bg-dashed bg-gray-300 border-l border-dashed border-gray-400 mt-0"></div>
-            
-            {/* Node Anggota Universal */}
-            <div className="relative bg-white border border-gray-200 shadow-sm rounded-xl p-4 w-64 text-center z-10 mt-0">
+            {/* Node Anggota Universal diletakkan terpisah di bawah struktur tanpa garis agar tidak terlihat meleset */}
+            <div className="relative bg-white border border-gray-200 shadow-sm rounded-xl p-4 w-64 text-center z-10 mt-12">
                <div className="flex flex-col items-center">
-                 <div className="w-10 h-10 bg-gray-50 rounded-full flex items-center justify-center mb-2 text-gray-600 border border-gray-200">
+                 <div className="w-10 h-10 bg-red-50 rounded-full flex items-center justify-center mb-2 text-red-600 border border-red-100">
                    <Users className="w-5 h-5" />
                  </div>
                  <div className="text-sm font-bold text-gray-900">Seluruh Anggota</div>
