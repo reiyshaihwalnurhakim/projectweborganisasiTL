@@ -3,9 +3,13 @@
 import { prisma } from '@/lib/db'
 import { memberSchema } from '@/lib/schemas'
 import { hashPassword } from '@/lib/auth/password'
+import { getSession } from '@/lib/auth/session'
 import { revalidatePath } from 'next/cache'
 
 export async function getMembers(search?: string) {
+  const session = await getSession()
+  if (!session) return []
+  
   return await prisma.user.findMany({
     where: search ? {
       OR: [
@@ -20,6 +24,9 @@ export async function getMembers(search?: string) {
 
 export async function createMember(formData: FormData) {
   try {
+    const session = await getSession()
+    if (session?.role !== 'admin') throw new Error('Unauthorized')
+
     const data = Object.fromEntries(formData.entries())
     const parsed = memberSchema.parse(data)
     
@@ -49,8 +56,22 @@ export async function createMember(formData: FormData) {
 }
 
 export async function updateMemberStatus(userId: string, newStatus: string) {
+  const session = await getSession()
+  if (session?.role !== 'admin') throw new Error('Unauthorized')
+
   await prisma.user.update({
     where: { id: userId },
+    data: { status: newStatus }
+  })
+  revalidatePath('/dashboard/anggota')
+}
+
+export async function updateBulkMemberStatus(userIds: string[], newStatus: string) {
+  const session = await getSession()
+  if (session?.role !== 'admin') throw new Error('Unauthorized')
+
+  await prisma.user.updateMany({
+    where: { id: { in: userIds } },
     data: { status: newStatus }
   })
   revalidatePath('/dashboard/anggota')

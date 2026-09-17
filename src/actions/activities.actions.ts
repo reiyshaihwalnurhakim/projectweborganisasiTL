@@ -62,3 +62,17 @@ export async function updateActivityStatus(id: string, status: string) {
   
   revalidatePath('/dashboard/kegiatan')
 }
+
+export async function updateActivityEvaluation(id: string, evaluation: string) {
+  const session = await getSession()
+  if (!session || (session.role !== 'admin' && session.role !== 'pengurus')) {
+    throw new Error('Tidak memiliki akses')
+  }
+
+  await prisma.activity.update({
+    where: { id },
+    data: { evaluation }
+  })
+  
+  revalidatePath('/dashboard/kegiatan')
+}

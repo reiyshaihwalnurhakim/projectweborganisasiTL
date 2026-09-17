@@ -76,6 +76,7 @@ export default function ActivityCard({ activity, canManage }: { activity: any, c
       activity={activity} 
       isOpen={isDetailOpen} 
       onClose={() => setIsDetailOpen(false)} 
+      canManage={canManage}
     />
     </>
   )

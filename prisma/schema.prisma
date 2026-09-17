@@ -60,6 +60,7 @@ model Activity {
   location       String
   personInCharge String
   status         ActivityStatus @default(UPCOMING)
+  evaluation     String?
   createdBy      String
   creator        User           @relation("ActivityCreator", fields: [createdBy], references: [id])
   createdAt      DateTime       @default(now())
@@ -184,4 +185,5 @@ model Announcement {
   author    User     @relation(fields: [authorId], references: [id])
   @@map("announcements")
 }
+
 

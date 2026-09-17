@@ -3,7 +3,7 @@ import { redirect } from 'next/navigation'
 import { getMembers } from '@/actions/members.actions'
 import { Search } from 'lucide-react'
 import AnggotaHeader from '@/components/anggota/AnggotaHeader'
-import MemberStatusSelect from '@/components/anggota/MemberStatusSelect'
+import AnggotaTable from '@/components/anggota/AnggotaTable'
 
 export default async function AnggotaPage({ searchParams }: { searchParams: { q?: string } }) {
   const session = await getSession()
@@ -26,50 +26,14 @@ export default async function AnggotaPage({ searchParams }: { searchParams: { q?
                 name="q"
                 defaultValue={query}
                 placeholder="Cari nama atau username..." 
-                className="w-full pl-9 pr-4 py-2 border rounded-lg text-sm focus:ring-2 focus:ring-blue-500 outline-none"
+                className="w-full pl-9 pr-4 py-2 border rounded-lg text-sm focus:ring-2 focus:ring-blue-500 outline-none text-gray-900"
               />
             </form>
           </div>
         </div>
 
-        {/* Table */}
-        <div className="overflow-x-auto">
-          <table className="w-full text-left text-sm whitespace-nowrap">
-            <thead className="bg-gray-50 text-gray-600 border-b border-gray-100">
-              <tr>
-                <th className="px-6 py-3 font-semibold">User</th>
-                <th className="px-6 py-3 font-semibold">Kontak</th>
-                <th className="px-6 py-3 font-semibold">Role</th>
-                <th className="px-6 py-3 font-semibold text-right">Status</th>
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-gray-100">
-              {members.map(member => (
-                <tr key={member.id} className="hover:bg-gray-50">
-                  <td className="px-6 py-4">
-                    <div className="font-medium text-gray-900">{member.nama}</div>
-                    <div className="text-gray-500 text-xs mt-0.5">@{member.username}</div>
-                  </td>
-                  <td className="px-6 py-4 text-gray-600">
-                    <div>{member.email || '-'}</div>
-                    <div className="text-xs">{member.no_telepon || '-'}</div>
-                  </td>
-                  <td className="px-6 py-4">
-                    <span className="capitalize px-2 py-1 rounded text-xs font-medium bg-blue-50 text-blue-700">
-                      {member.role.name}
-                    </span>
-                  </td>
-                  <td className="px-6 py-4 text-right">
-                    <MemberStatusSelect userId={member.id} currentStatus={member.status} />
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-          {members.length === 0 && (
-            <div className="text-center py-12 text-gray-500">Tidak ada data anggota ditemukan.</div>
-          )}
-        </div>
+        {/* Table Component */}
+        <AnggotaTable members={members} />
       </div>
     </div>
   )
