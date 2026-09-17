@@ -54,9 +54,29 @@ export default async function DashboardHome() {
 
   return (
     <div className="space-y-6">
-      <div>
-        <h1 className="text-2xl font-bold text-gray-900">Selamat Datang, {user?.nama || session?.username} 👋</h1>
-        <p className="text-sm text-gray-500 mt-1">Ini adalah ringkasan informasi organisasi Anda hari ini.</p>
+      {/* Hero Section Paskibra */}
+      <div className="bg-red-700 rounded-2xl p-6 sm:p-10 text-white shadow-lg relative overflow-hidden flex flex-col justify-center min-h-[200px]">
+        {/* Dekorasi Latar Belakang */}
+        <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/3"></div>
+        <div className="absolute bottom-0 right-1/4 w-32 h-32 bg-black/20 rounded-full blur-2xl translate-y-1/2"></div>
+        
+        <div className="relative z-10 max-w-2xl">
+          <div className="inline-block px-3 py-1 bg-white/20 border border-white/30 rounded-full text-xs font-semibold tracking-wide mb-4 uppercase shadow-sm">
+            Portal Anggota
+          </div>
+          <h1 className="text-3xl sm:text-4xl font-bold tracking-tight mb-2">
+            Paskibra Satria
+          </h1>
+          <p className="text-red-100 text-sm sm:text-base leading-relaxed mb-4">
+            Selamat datang, <span className="font-semibold text-white">{user?.nama || session?.username}</span>! 
+            Sistem informasi ini dirancang untuk mempermudah koordinasi, memantau kedisiplinan, dan membangun kekompakan seluruh jajaran anggota serta pengurus Paskibra.
+          </p>
+          <div className="flex gap-3 mt-2">
+             <Link href="/dashboard/visi-misi" className="bg-white text-red-700 px-4 py-2 rounded-lg text-sm font-bold shadow-sm hover:bg-gray-50 transition-colors">
+               Lihat Visi & Misi
+             </Link>
+          </div>
+        </div>
       </div>
 
       {/* KPI Cards - Sembunyikan di layar mobile (hanya tampil di layar medium/md ke atas) */}
@@ -109,7 +129,7 @@ export default async function DashboardHome() {
         <div className="bg-white border border-gray-100 rounded-xl shadow-sm overflow-hidden">
           <div className="p-5 border-b border-gray-50 flex justify-between items-center">
             <h2 className="font-bold text-gray-900">Jadwal Terdekat</h2>
-            <Link href="/dashboard/kegiatan" className="text-sm text-blue-600 font-medium hover:underline">
+            <Link href="/dashboard/kegiatan" className="text-sm text-red-600 font-medium hover:underline">
               Lihat Semua
             </Link>
           </div>
@@ -125,7 +145,7 @@ export default async function DashboardHome() {
                         {formatShortDateId(keg.date)}
                       </span>
                       <span className="flex items-center gap-1.5">
-                        <span className="w-1.5 h-1.5 bg-blue-500 rounded-full" />
+                        <span className="w-1.5 h-1.5 bg-red-500 rounded-full" />
                         {keg.location}
                       </span>
                     </div>
@@ -151,7 +171,7 @@ export default async function DashboardHome() {
           <div className="p-6 flex-1 bg-gray-50/50">
             <div className="space-y-4">
                {announcements.length > 0 ? announcements.map((ann) => (
-                 <div key={ann.id} className="bg-white border-l-4 border-blue-500 shadow-sm p-4 rounded-r-lg">
+                 <div key={ann.id} className="bg-white border-l-4 border-red-500 shadow-sm p-4 rounded-r-lg">
                    <div className="flex justify-between items-start mb-1 gap-2">
                      <h3 className="font-semibold text-gray-900">{ann.title}</h3>
                      <span className="text-xs text-gray-400 shrink-0">{new Date(ann.createdAt).toLocaleDateString('id-ID')}</span>

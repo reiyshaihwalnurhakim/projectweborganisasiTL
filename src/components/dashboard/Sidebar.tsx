@@ -7,6 +7,7 @@ import { logoutAction } from '@/actions/auth.actions'
 
 const menuItems = [
   { name: 'Beranda', href: '/dashboard', icon: Home },
+  { name: 'Profil', href: '/dashboard/visi-misi', icon: Users },
   { name: 'Absensi', href: '/dashboard/absensi', icon: ClipboardList },
   { name: 'Acara', href: '/dashboard/kegiatan', icon: Calendar },
   { name: 'Struktur Organisasi', href: '/dashboard/struktur', icon: Users },
@@ -27,10 +28,10 @@ export default function Sidebar({ userRole }: { userRole: string }) {
     <div className="hidden md:flex flex-col w-56 bg-[#f7f7f9] border-r border-gray-200 min-h-screen fixed left-0 top-0 bottom-0">
       <div className="h-14 flex items-center px-5 border-b border-gray-200">
         <div className="flex items-center gap-2.5">
-          <div className="w-7 h-7 bg-black rounded flex items-center justify-center">
-            <span className="text-white font-bold text-xs tracking-wider">SM</span>
+          <div className="w-7 h-7 bg-red-700 rounded flex items-center justify-center">
+            <span className="text-white font-bold text-xs tracking-wider">PK</span>
           </div>
-          <span className="font-semibold text-gray-900 text-[15px] tracking-tight">Organisasi</span>
+          <span className="font-semibold text-gray-900 text-[15px] tracking-tight">Paskibra</span>
         </div>
       </div>
 

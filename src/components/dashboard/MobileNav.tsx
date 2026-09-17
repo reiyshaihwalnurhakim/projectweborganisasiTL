@@ -8,6 +8,7 @@ import { logoutAction } from '@/actions/auth.actions'
 
 const menuItems = [
   { name: 'Beranda', href: '/dashboard', icon: Home },
+  { name: 'Profil', href: '/dashboard/visi-misi', icon: Users },
   { name: 'Absensi', href: '/dashboard/absensi', icon: ClipboardList },
   { name: 'Jadwal', href: '/dashboard/kegiatan', icon: Calendar },
   { name: 'Struktur', href: '/dashboard/struktur', icon: Users },
@@ -48,10 +49,10 @@ export default function MobileNav({ userRole }: { userRole: string }) {
           <div className="relative flex w-full max-w-xs flex-col bg-white h-full shadow-xl">
             <div className="flex h-16 items-center justify-between px-6 border-b">
               <div className="flex items-center gap-2">
-                <div className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center">
-                  <span className="text-white font-bold text-sm">SM</span>
+                <div className="w-8 h-8 bg-red-700 rounded-lg flex items-center justify-center">
+                  <span className="text-white font-bold text-sm tracking-wider">PK</span>
                 </div>
-                <span className="font-bold text-gray-900 text-lg">Organisasi</span>
+                <span className="font-bold text-gray-900 text-lg tracking-tight">Paskibra</span>
               </div>
               <button
                 onClick={() => setIsOpen(false)}
@@ -71,11 +72,11 @@ export default function MobileNav({ userRole }: { userRole: string }) {
                     onClick={() => setIsOpen(false)}
                     className={`flex items-center gap-3 px-3 py-3 rounded-lg transition-colors ${
                       isActive
-                        ? 'bg-blue-50 text-blue-700 font-medium'
+                        ? 'bg-red-50 text-red-700 font-medium'
                         : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900'
                     }`}
                   >
-                    <item.icon className={`w-5 h-5 ${isActive ? 'text-blue-700' : 'text-gray-400'}`} />
+                    <item.icon className={`w-5 h-5 ${isActive ? 'text-red-700' : 'text-gray-400'}`} />
                     {item.name}
                   </Link>
                 )
