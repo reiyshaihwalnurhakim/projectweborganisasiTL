@@ -2,9 +2,11 @@
 
 import { useState } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 import { usePathname } from 'next/navigation'
 import { Home, ClipboardList, Calendar, Users, UserCog, DollarSign, Settings, Menu, X, LogOut, History } from 'lucide-react'
 import { logoutAction } from '@/actions/auth.actions'
+import logoImg from '@/logo.png'
 
 const menuItems = [
   { name: 'Beranda', href: '/dashboard', icon: Home },
@@ -32,6 +34,7 @@ export default function MobileNav({ userRole }: { userRole: string }) {
         <button
           onClick={() => setIsOpen(true)}
           className="p-2 -ml-2 text-gray-600 hover:bg-gray-100 rounded-lg"
+          aria-label="Buka Menu"
         >
           <Menu className="w-6 h-6" />
         </button>
@@ -48,15 +51,27 @@ export default function MobileNav({ userRole }: { userRole: string }) {
           {/* Drawer */}
           <div className="relative flex w-full max-w-xs flex-col bg-white h-full shadow-xl">
             <div className="flex h-16 items-center justify-between px-6 border-b">
-              <div className="flex items-center gap-2">
-                <div className="w-8 h-8 bg-red-700 rounded-lg flex items-center justify-center">
-                  <span className="text-white font-bold text-sm tracking-wider">PK</span>
+              <Link 
+                href="/dashboard" 
+                onClick={() => setIsOpen(false)}
+                className="flex items-center gap-2.5"
+              >
+                <div className="w-9 h-9 relative flex items-center justify-center shrink-0">
+                  <Image
+                    src={logoImg}
+                    alt="Logo Paskibra"
+                    width={36}
+                    height={36}
+                    className="object-contain w-9 h-9"
+                    priority
+                  />
                 </div>
                 <span className="font-bold text-gray-900 text-lg tracking-tight">Paskibra</span>
-              </div>
+              </Link>
               <button
                 onClick={() => setIsOpen(false)}
                 className="p-2 -mr-2 text-gray-500 hover:bg-gray-100 rounded-lg"
+                aria-label="Tutup Menu"
               >
                 <X className="w-6 h-6" />
               </button>

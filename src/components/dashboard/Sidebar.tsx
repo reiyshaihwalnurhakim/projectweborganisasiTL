@@ -1,9 +1,11 @@
 'use client'
 
 import Link from 'next/link'
+import Image from 'next/image'
 import { usePathname } from 'next/navigation'
 import { Home, ClipboardList, Calendar, Users, UserCog, DollarSign, Settings, LogOut, History } from 'lucide-react'
 import { logoutAction } from '@/actions/auth.actions'
+import logoImg from '@/logo.png'
 
 const menuItems = [
   { name: 'Beranda', href: '/dashboard', icon: Home },
@@ -27,12 +29,19 @@ export default function Sidebar({ userRole }: { userRole: string }) {
   return (
     <div className="hidden md:flex flex-col w-56 bg-[#f7f7f9] border-r border-gray-200 min-h-screen fixed left-0 top-0 bottom-0">
       <div className="h-14 flex items-center px-5 border-b border-gray-200">
-        <div className="flex items-center gap-2.5">
-          <div className="w-7 h-7 bg-red-700 rounded flex items-center justify-center">
-            <span className="text-white font-bold text-xs tracking-wider">PK</span>
+        <Link href="/dashboard" className="flex items-center gap-2.5 hover:opacity-90 transition-opacity">
+          <div className="w-8 h-8 relative flex items-center justify-center shrink-0">
+            <Image
+              src={logoImg}
+              alt="Logo Paskibra"
+              width={32}
+              height={32}
+              className="object-contain w-8 h-8"
+              priority
+            />
           </div>
           <span className="font-semibold text-gray-900 text-[15px] tracking-tight">Paskibra</span>
-        </div>
+        </Link>
       </div>
 
       <div className="flex-1 overflow-y-auto py-4 px-3 space-y-0.5">
