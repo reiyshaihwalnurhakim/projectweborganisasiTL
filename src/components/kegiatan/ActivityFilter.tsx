@@ -3,8 +3,8 @@
 import { useRouter, useSearchParams } from 'next/navigation'
 import { Search } from 'lucide-react'
 
-const tabs = [
-  { id: 'ALL', label: 'Semua' },
+const statusOptions = [
+  { id: 'ALL', label: 'Semua Status' },
   { id: 'UPCOMING', label: 'Akan Datang' },
   { id: 'ONGOING', label: 'Berlangsung' },
   { id: 'COMPLETED', label: 'Selesai' },
@@ -23,30 +23,26 @@ export default function ActivityFilter({ currentStatus, currentSearch }: { curre
   }
 
   return (
-    <div className="flex flex-col sm:flex-row gap-4 justify-between bg-white p-2 rounded-xl shadow-sm border border-gray-100">
-      <div className="flex overflow-x-auto no-scrollbar gap-1 p-1">
-        {tabs.map(tab => (
-          <button
-            key={tab.id}
-            onClick={() => updateFilter('status', tab.id === 'ALL' ? '' : tab.id)}
-            className={`px-4 py-2 rounded-lg text-sm font-medium whitespace-nowrap transition-colors ${
-              (currentStatus === tab.id || (tab.id === 'ALL' && currentStatus === ''))
-                ? 'bg-blue-50 text-blue-700'
-                : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900'
-            }`}
-          >
-            {tab.label}
-          </button>
-        ))}
+    <div className="flex flex-col sm:flex-row gap-4 justify-between bg-white p-3 rounded-xl shadow-sm border border-gray-100">
+      <div className="min-w-[200px]">
+        <select 
+          value={currentStatus || 'ALL'}
+          onChange={(e) => updateFilter('status', e.target.value === 'ALL' ? '' : e.target.value)}
+          className="w-full border-gray-300 text-gray-900 rounded-lg shadow-sm focus:border-blue-500 focus:ring-blue-500 p-2.5 border outline-none text-sm font-medium"
+        >
+          {statusOptions.map(opt => (
+            <option key={opt.id} value={opt.id}>{opt.label}</option>
+          ))}
+        </select>
       </div>
 
-      <div className="relative p-1 min-w-[250px]">
-        <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
+      <div className="relative flex-1 max-w-md">
+        <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
         <input 
           defaultValue={currentSearch}
           onChange={(e) => updateFilter('q', e.target.value)}
-          placeholder="Cari kegiatan..." 
-          className="w-full pl-10 pr-4 py-2 bg-gray-50 border-none rounded-lg text-sm focus:ring-2 focus:ring-blue-500 outline-none"
+          placeholder="Cari nama acara..." 
+          className="w-full pl-9 pr-4 py-2.5 bg-gray-50 border-gray-200 border rounded-lg text-sm focus:ring-2 focus:ring-blue-500 outline-none text-gray-900"
         />
       </div>
     </div>

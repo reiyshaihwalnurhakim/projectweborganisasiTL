@@ -8,7 +8,7 @@ import { logoutAction } from '@/actions/auth.actions'
 const menuItems = [
   { name: 'Beranda', href: '/dashboard', icon: Home },
   { name: 'Absensi', href: '/dashboard/absensi', icon: ClipboardList },
-  { name: 'Jadwal Kegiatan', href: '/dashboard/kegiatan', icon: Calendar },
+  { name: 'Acara', href: '/dashboard/kegiatan', icon: Calendar },
   { name: 'Struktur Organisasi', href: '/dashboard/struktur', icon: Users },
   { name: 'Keuangan', href: '/dashboard/keuangan', icon: DollarSign, roles: ['admin', 'pengurus'] },
   { name: 'Anggota', href: '/dashboard/anggota', icon: UserCog, roles: ['admin'] },
