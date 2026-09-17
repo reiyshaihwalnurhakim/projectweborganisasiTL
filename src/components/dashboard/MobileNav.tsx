@@ -15,7 +15,7 @@ const menuItems = [
   { name: 'Jadwal', href: '/dashboard/kegiatan', icon: Calendar },
   { name: 'Struktur', href: '/dashboard/struktur', icon: Users },
   { name: 'Keuangan', href: '/dashboard/keuangan', icon: DollarSign, roles: ['admin', 'pengurus'] },
-  { name: 'Anggota', href: '/dashboard/anggota', icon: UserCog, roles: ['admin'] },
+  { name: 'Anggota', href: '/dashboard/anggota', icon: UserCog },
   { name: 'Audit Log', href: '/dashboard/pengaturan/audit-log', icon: History, roles: ['admin'] },
   { name: 'Pengaturan', href: '/dashboard/pengaturan', icon: Settings },
 ]

@@ -7,14 +7,14 @@ import AnggotaTable from '@/components/anggota/AnggotaTable'
 
 export default async function AnggotaPage({ searchParams }: { searchParams: { q?: string } }) {
   const session = await getSession()
-  if (session?.role !== 'admin') redirect('/dashboard')
+  const isAdmin = session?.role === 'admin'
 
   const query = searchParams?.q || ''
   const members = await getMembers(query)
 
   return (
     <div className="space-y-6">
-      <AnggotaHeader />
+      <AnggotaHeader isAdmin={isAdmin} />
 
       <div className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
         {/* Toolbar */}
@@ -33,7 +33,7 @@ export default async function AnggotaPage({ searchParams }: { searchParams: { q?
         </div>
 
         {/* Table Component */}
-        <AnggotaTable members={members} />
+        <AnggotaTable members={members} isAdmin={isAdmin} />
       </div>
     </div>
   )

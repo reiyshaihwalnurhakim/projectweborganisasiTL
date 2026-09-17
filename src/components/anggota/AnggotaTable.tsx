@@ -5,7 +5,7 @@ import { updateBulkMemberStatus } from '@/actions/members.actions'
 import MemberStatusSelect from './MemberStatusSelect'
 import { CheckSquare, Square } from 'lucide-react'
 
-export default function AnggotaTable({ members }: { members: any[] }) {
+export default function AnggotaTable({ members, isAdmin }: { members: any[], isAdmin: boolean }) {
   const [selectedIds, setSelectedIds] = useState<string[]>([])
   const [isUpdating, setIsUpdating] = useState(false)
 
@@ -50,15 +50,17 @@ export default function AnggotaTable({ members }: { members: any[] }) {
         <table className="w-full text-left text-sm whitespace-nowrap">
           <thead className="bg-gray-50 text-gray-600 border-b border-gray-100">
             <tr>
-              <th className="px-4 py-3 w-12 text-center">
-                <button onClick={toggleSelectAll} className="text-gray-400 hover:text-gray-600">
-                  {selectedIds.length === members.length && members.length > 0 ? (
-                    <CheckSquare className="w-5 h-5 text-red-600" />
-                  ) : (
-                    <Square className="w-5 h-5" />
-                  )}
-                </button>
-              </th>
+              {isAdmin && (
+                <th className="px-4 py-3 w-12 text-center">
+                  <button onClick={toggleSelectAll} className="text-gray-400 hover:text-gray-600">
+                    {selectedIds.length === members.length && members.length > 0 ? (
+                      <CheckSquare className="w-5 h-5 text-red-600" />
+                    ) : (
+                      <Square className="w-5 h-5" />
+                    )}
+                  </button>
+                </th>
+              )}
               <th className="px-6 py-3 font-semibold">User</th>
               <th className="px-6 py-3 font-semibold">Kontak</th>
               <th className="px-6 py-3 font-semibold">Role</th>
@@ -68,15 +70,17 @@ export default function AnggotaTable({ members }: { members: any[] }) {
           <tbody className="divide-y divide-gray-100">
             {members.map(member => (
               <tr key={member.id} className={`hover:bg-gray-50 ${selectedIds.includes(member.id) ? 'bg-red-50/30' : ''}`}>
-                <td className="px-4 py-4 text-center">
-                  <button onClick={() => toggleSelect(member.id)} className="text-gray-400 hover:text-gray-600">
-                    {selectedIds.includes(member.id) ? (
-                      <CheckSquare className="w-5 h-5 text-red-600" />
-                    ) : (
-                      <Square className="w-5 h-5" />
-                    )}
-                  </button>
-                </td>
+                {isAdmin && (
+                  <td className="px-4 py-4 text-center">
+                    <button onClick={() => toggleSelect(member.id)} className="text-gray-400 hover:text-gray-600">
+                      {selectedIds.includes(member.id) ? (
+                        <CheckSquare className="w-5 h-5 text-red-600" />
+                      ) : (
+                        <Square className="w-5 h-5" />
+                      )}
+                    </button>
+                  </td>
+                )}
                 <td className="px-6 py-4">
                   <div className="font-medium text-gray-900">{member.nama}</div>
                   <div className="text-gray-500 text-xs mt-0.5">@{member.username}</div>
@@ -91,7 +95,7 @@ export default function AnggotaTable({ members }: { members: any[] }) {
                   </span>
                 </td>
                 <td className="px-6 py-4 text-right">
-                  <MemberStatusSelect userId={member.id} currentStatus={member.status} />
+                  <MemberStatusSelect userId={member.id} currentStatus={member.status} isAdmin={isAdmin} />
                 </td>
               </tr>
             ))}
