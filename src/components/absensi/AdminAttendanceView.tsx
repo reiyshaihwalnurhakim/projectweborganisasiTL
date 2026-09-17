@@ -26,7 +26,7 @@ export default function AdminAttendanceView({ activities, selectedActivityId, at
       <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-5">
         <label className="block text-sm font-medium text-gray-700 mb-2">Pilih Kegiatan</label>
         <select 
-          className="w-full sm:w-96 border-gray-300 rounded-lg shadow-sm focus:border-blue-500 focus:ring-blue-500 p-2 border"
+          className="w-full sm:w-96 border-gray-300 text-gray-900 rounded-lg shadow-sm focus:border-blue-500 focus:ring-blue-500 p-2 border outline-none"
           value={selectedActivityId || ''}
           onChange={(e) => router.push(`?activityId=${e.target.value}`)}
         >
