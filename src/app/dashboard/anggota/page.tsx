@@ -1,8 +1,9 @@
 import { getSession } from '@/lib/auth/session'
 import { redirect } from 'next/navigation'
-import { getMembers, toggleMemberStatus } from '@/actions/members.actions'
-import { Search, Ban, CheckCircle } from 'lucide-react'
+import { getMembers } from '@/actions/members.actions'
+import { Search } from 'lucide-react'
 import AnggotaHeader from '@/components/anggota/AnggotaHeader'
+import MemberStatusSelect from '@/components/anggota/MemberStatusSelect'
 
 export default async function AnggotaPage({ searchParams }: { searchParams: { q?: string } }) {
   const session = await getSession()
@@ -33,14 +34,13 @@ export default async function AnggotaPage({ searchParams }: { searchParams: { q?
 
         {/* Table */}
         <div className="overflow-x-auto">
-          <table className="w-full text-left text-sm">
+          <table className="w-full text-left text-sm whitespace-nowrap">
             <thead className="bg-gray-50 text-gray-600 border-b border-gray-100">
               <tr>
                 <th className="px-6 py-3 font-semibold">User</th>
                 <th className="px-6 py-3 font-semibold">Kontak</th>
                 <th className="px-6 py-3 font-semibold">Role</th>
-                <th className="px-6 py-3 font-semibold">Status</th>
-                <th className="px-6 py-3 font-semibold text-right">Aksi</th>
+                <th className="px-6 py-3 font-semibold text-right">Status</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-gray-100">
@@ -59,23 +59,8 @@ export default async function AnggotaPage({ searchParams }: { searchParams: { q?
                       {member.role.name}
                     </span>
                   </td>
-                  <td className="px-6 py-4">
-                    {member.status === 'active' ? (
-                      <span className="flex items-center gap-1.5 text-green-600 text-xs font-medium">
-                        <CheckCircle className="w-3.5 h-3.5" /> Aktif
-                      </span>
-                    ) : (
-                      <span className="flex items-center gap-1.5 text-red-600 text-xs font-medium">
-                        <Ban className="w-3.5 h-3.5" /> Nonaktif
-                      </span>
-                    )}
-                  </td>
                   <td className="px-6 py-4 text-right">
-                    <form action={toggleMemberStatus.bind(null, member.id, member.status)}>
-                       <button type="submit" className="text-blue-600 text-xs hover:underline">
-                         Toggle Status
-                       </button>
-                    </form>
+                    <MemberStatusSelect userId={member.id} currentStatus={member.status} />
                   </td>
                 </tr>
               ))}

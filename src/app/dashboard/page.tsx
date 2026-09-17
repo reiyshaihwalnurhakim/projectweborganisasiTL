@@ -59,8 +59,8 @@ export default async function DashboardHome() {
         <p className="text-sm text-gray-500 mt-1">Ini adalah ringkasan informasi organisasi Anda hari ini.</p>
       </div>
 
-      {/* KPI Cards */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      {/* KPI Cards - Sembunyikan di layar mobile (hanya tampil di layar medium/md ke atas) */}
+      <div className="hidden md:grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         <div className="bg-white p-5 rounded-xl border border-gray-100 shadow-sm flex items-center gap-4 min-w-0">
           <div className="w-12 h-12 bg-blue-50 text-blue-600 rounded-full flex items-center justify-center shrink-0">
             <Users className="w-6 h-6" />

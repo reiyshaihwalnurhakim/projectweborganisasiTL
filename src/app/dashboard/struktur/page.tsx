@@ -70,7 +70,8 @@ export default async function StrukturPage() {
     <div className="space-y-6">
       <StrukturHeader isAdmin={isAdmin} positions={positions} users={users} />
 
-      <div className="bg-gray-50 p-8 rounded-xl border border-gray-200 overflow-x-auto min-h-[500px] flex justify-center items-start">
+      <div className="bg-gray-50 p-4 md:p-8 rounded-xl border border-gray-200 overflow-x-auto min-h-[500px]">
+        <div className="min-w-max flex flex-col items-center mx-auto">
         {tree.length > 0 ? (
           tree.map((rootNode: any) => (
             <OrgNode key={rootNode.id} node={rootNode} />
@@ -78,6 +79,7 @@ export default async function StrukturPage() {
         ) : (
           <div className="text-gray-500 py-12">Belum ada struktur organisasi yang dibuat.</div>
         )}
+        </div>
       </div>
     </div>
   )

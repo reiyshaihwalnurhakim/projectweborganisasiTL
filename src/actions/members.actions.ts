@@ -48,10 +48,10 @@ export async function createMember(formData: FormData) {
   }
 }
 
-export async function toggleMemberStatus(userId: string, currentStatus: string) {
+export async function updateMemberStatus(userId: string, newStatus: string) {
   await prisma.user.update({
     where: { id: userId },
-    data: { status: currentStatus === 'active' ? 'inactive' : 'active' }
+    data: { status: newStatus }
   })
   revalidatePath('/dashboard/anggota')
 }
