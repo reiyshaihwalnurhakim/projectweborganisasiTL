@@ -37,7 +37,7 @@ export async function createMember(formData: FormData) {
         no_telepon: parsed.no_telepon as string,
         password_hash: hashedPassword,
         roleId: role.id,
-        status: 'active'
+        status: 'aktif'
       }
     })
 

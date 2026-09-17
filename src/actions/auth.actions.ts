@@ -30,8 +30,8 @@ export async function loginAction(prevState: FormState, formData: FormData): Pro
       return { error: 'Username atau password salah.' }
     }
 
-    if (user.status !== 'active') {
-      return { error: 'Akun Anda telah dinonaktifkan. Silakan hubungi admin.' }
+    if (user.status !== 'active' && user.status !== 'aktif') {
+      return { error: 'Akun Anda sedang tidak aktif (Purna/Keluar). Silakan hubungi admin.' }
     }
 
     const isPasswordValid = await verifyPassword(password, user.password_hash)
