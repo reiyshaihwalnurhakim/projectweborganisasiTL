@@ -5,6 +5,7 @@ import { formatShortDateId } from '@/lib/utils/date'
 import { Users, Calendar, Wallet, CheckCircle } from 'lucide-react'
 import Link from 'next/link'
 import AnnouncementButton from '@/components/dashboard/AnnouncementButton'
+import DeleteAnnouncementButton from '@/components/dashboard/DeleteAnnouncementButton'
 
 export default async function DashboardHome() {
   const session = await getSession()
@@ -174,7 +175,12 @@ export default async function DashboardHome() {
                  <div key={ann.id} className="bg-white border-l-4 border-red-500 shadow-sm p-4 rounded-r-lg">
                    <div className="flex justify-between items-start mb-1 gap-2">
                      <h3 className="font-semibold text-gray-900">{ann.title}</h3>
-                     <span className="text-xs text-gray-400 shrink-0">{new Date(ann.createdAt).toLocaleDateString('id-ID')}</span>
+                     <div className="flex items-center">
+                       <span className="text-xs text-gray-400 shrink-0">{new Date(ann.createdAt).toLocaleDateString('id-ID')}</span>
+                       {(session?.role === 'admin' || session?.role === 'pengurus') && (
+                         <DeleteAnnouncementButton id={ann.id} />
+                       )}
+                     </div>
                    </div>
                    <p className="text-sm text-gray-600 whitespace-pre-line">{ann.content}</p>
                  </div>

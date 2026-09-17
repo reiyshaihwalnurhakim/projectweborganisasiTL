@@ -32,3 +32,17 @@ export async function createAnnouncement(formData: FormData) {
     return { error: error.message || 'Gagal membuat pengumuman' }
   }
 }
+
+export async function deleteAnnouncement(id: string) {
+  const session = await getSession()
+  if (!session || (session.role !== 'admin' && session.role !== 'pengurus')) {
+    throw new Error('Unauthorized')
+  }
+
+  await prisma.announcement.delete({
+    where: { id }
+  })
+
+  revalidatePath('/dashboard')
+}
+
