@@ -45,6 +45,9 @@ export async function createActivity(formData: FormData) {
     revalidatePath('/dashboard/kegiatan')
     return { success: true }
   } catch (error: any) {
+    if (error.name === 'ZodError') {
+      return { error: error.errors[0].message }
+    }
     return { error: error.message || 'Gagal membuat kegiatan' }
   }
 }

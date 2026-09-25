@@ -69,6 +69,9 @@ export async function createTransaction(formData: FormData) {
     revalidatePath('/dashboard/keuangan')
     return { success: true }
   } catch (error: any) {
+    if (error.name === 'ZodError') {
+      return { error: error.errors[0].message }
+    }
     return { error: error.message || 'Gagal menyimpan transaksi' }
   }
 }
