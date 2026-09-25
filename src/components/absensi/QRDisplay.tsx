@@ -27,8 +27,10 @@ export default function QRDisplay({ activityId }: { activityId: string }) {
 
   if (!token) return <div className="text-center p-12">Generating QR Code...</div>
 
-  // Buat URL yang berisi activityId dan token (atau cukup jadikan payload JSON)
-  const qrData = JSON.stringify({ activityId, token })
+  // Buat URL lengkap agar kamera bawaan HP (iOS/Android) bisa langsung membuka browser
+  const qrData = typeof window !== 'undefined' 
+    ? `${window.location.origin}/dashboard/absensi/scan?activityId=${activityId}&token=${token}`
+    : `https://paskibra.com/dashboard/absensi/scan?activityId=${activityId}&token=${token}`
 
   return (
     <div className="flex flex-col items-center bg-white p-8 rounded-2xl shadow-sm border border-gray-100">
