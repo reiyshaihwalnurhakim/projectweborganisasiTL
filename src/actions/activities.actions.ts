@@ -46,7 +46,12 @@ export async function createActivity(formData: FormData) {
     return { success: true }
   } catch (error: any) {
     if (error.name === 'ZodError') {
-      return { error: error.errors[0].message }
+      try {
+        const issues = JSON.parse(error.message)
+        return { error: issues[0]?.message || 'Input tidak valid' }
+      } catch (e) {
+        return { error: 'Input tidak valid' }
+      }
     }
     return { error: error.message || 'Gagal membuat kegiatan' }
   }

@@ -15,15 +15,19 @@ export default function ActivityFormModal({ isOpen, onClose }: { isOpen: boolean
     setLoading(true)
     setError('')
     
-    const formData = new FormData(e.currentTarget)
-    const result = await createActivity(formData)
-    
-    if (result.error) {
-      setError(result.error)
+    try {
+      const formData = new FormData(e.currentTarget)
+      const result = await createActivity(formData)
+      
+      if (result.error) {
+        setError(result.error)
+      } else {
+        onClose()
+      }
+    } catch (err: any) {
+      setError(err.message || 'Terjadi kesalahan sistem')
+    } finally {
       setLoading(false)
-    } else {
-      setLoading(false)
-      onClose()
     }
   }
 
