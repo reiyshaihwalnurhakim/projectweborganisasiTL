@@ -58,8 +58,26 @@ export default async function AuditLogPage() {
                   <td className="px-6 py-4 text-gray-600">
                     {log.entity} {log.entityId && <span className="text-xs text-gray-400">({log.entityId.substring(0,8)}...)</span>}
                   </td>
-                  <td className="px-6 py-4 text-xs text-gray-400 font-mono truncate max-w-xs">
-                    {log.details || '-'}
+                  <td className="px-6 py-4 text-xs">
+                    {(() => {
+                      if (!log.details) return <span className="text-gray-400">-</span>
+                      try {
+                        const parsed = JSON.parse(log.details)
+                        if (typeof parsed === 'object' && parsed !== null) {
+                          return (
+                            <div className="flex flex-wrap gap-1.5">
+                              {Object.entries(parsed).map(([key, value]) => (
+                                <span key={key} className="inline-flex items-center gap-1 px-2 py-0.5 bg-gray-50 border border-gray-200 rounded text-gray-600">
+                                  <span className="font-semibold capitalize">{key}:</span> 
+                                  <span>{String(value)}</span>
+                                </span>
+                              ))}
+                            </div>
+                          )
+                        }
+                      } catch (e) {}
+                      return <span className="text-gray-500">{log.details}</span>
+                    })()}
                   </td>
                 </tr>
               ))}
