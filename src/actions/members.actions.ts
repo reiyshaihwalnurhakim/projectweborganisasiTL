@@ -14,7 +14,8 @@ export async function getMembers(search?: string) {
     where: search ? {
       OR: [
         { nama: { contains: search, mode: 'insensitive' } },
-        { username: { contains: search, mode: 'insensitive' } }
+        { username: { contains: search, mode: 'insensitive' } },
+        { angkatan: { contains: search, mode: 'insensitive' } }
       ]
     } : undefined,
     include: { role: true },
@@ -42,6 +43,7 @@ export async function createMember(formData: FormData) {
         username: parsed.username,
         email: parsed.email || null,
         no_telepon: parsed.no_telepon as string,
+        angkatan: parsed.angkatan || null,
         password_hash: hashedPassword,
         roleId: role.id,
         status: 'aktif'

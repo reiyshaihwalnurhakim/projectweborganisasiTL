@@ -62,6 +62,7 @@ export default function AnggotaTable({ members, isAdmin }: { members: any[], isA
                 </th>
               )}
               <th className="px-6 py-3 font-semibold">User</th>
+                <th className="px-6 py-3 font-semibold">Angkatan</th>
               <th className="px-6 py-3 font-semibold">Kontak</th>
               <th className="px-6 py-3 font-semibold">Role</th>
               <th className="px-6 py-3 font-semibold text-right">Status</th>
@@ -84,6 +85,15 @@ export default function AnggotaTable({ members, isAdmin }: { members: any[], isA
                 <td className="px-6 py-4">
                   <div className="font-medium text-gray-900">{member.nama}</div>
                   <div className="text-gray-500 text-xs mt-0.5">@{member.username}</div>
+                </td>
+                <td className="px-6 py-4">
+                  {member.angkatan ? (
+                    <span className="inline-flex items-center px-2 py-0.5 rounded text-xs font-semibold bg-red-50 text-red-700 border border-red-100">
+                      {member.angkatan}
+                    </span>
+                  ) : (
+                    <span className="text-gray-400 text-xs">-</span>
+                  )}
                 </td>
                 <td className="px-6 py-4 text-gray-600">
                   <div>{member.email || '-'}</div>

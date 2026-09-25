@@ -5,6 +5,7 @@ export const memberSchema = z.object({
   username: z.string().min(3, 'Username minimal 3 karakter'),
   email: z.string().email('Email tidak valid').optional().or(z.literal('')),
   no_telepon: z.string().optional(),
+  angkatan: z.string().optional(),
   roleName: z.enum(['admin', 'pengurus', 'anggota']),
   password: z.string().min(6, 'Password minimal 6 karakter').optional(), // Only for create or reset
 })

@@ -28,6 +28,7 @@ model User {
   no_telepon    String?
   foto          String?
   status        String   @default("active") // 'active' atau 'inactive'
+  angkatan      String?  // Nama angkatan atau brigade
   roleId        String
   role          Role     @relation(fields: [roleId], references: [id])
   createdAt     DateTime @default(now())
