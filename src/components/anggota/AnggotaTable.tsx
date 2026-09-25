@@ -1,9 +1,9 @@
 'use client'
 
 import { useState } from 'react'
-import { updateBulkMemberStatus } from '@/actions/members.actions'
+import { updateBulkMemberStatus, deleteMembers } from '@/actions/members.actions'
 import MemberStatusSelect from './MemberStatusSelect'
-import { CheckSquare, Square } from 'lucide-react'
+import { CheckSquare, Square, Trash2 } from 'lucide-react'
 
 export default function AnggotaTable({ members, isAdmin }: { members: any[], isAdmin: boolean }) {
   const [selectedIds, setSelectedIds] = useState<string[]>([])
@@ -31,6 +31,20 @@ export default function AnggotaTable({ members, isAdmin }: { members: any[], isA
     setIsUpdating(false)
   }
 
+  const handleBulkDelete = async () => {
+    if (selectedIds.length === 0) return
+    if (!confirm('Yakin ingin menghapus permanen anggota terpilih? Ini juga akan menghapus email dan data absen terkait.')) return
+    
+    setIsUpdating(true)
+    const result = await deleteMembers(selectedIds)
+    if (result.error) {
+      alert(result.error)
+    } else {
+      setSelectedIds([])
+    }
+    setIsUpdating(false)
+  }
+
   return (
     <div>
       {/* Bulk Action Toolbar */}
@@ -38,10 +52,12 @@ export default function AnggotaTable({ members, isAdmin }: { members: any[], isA
         <div className="bg-red-50 border-b border-red-100 p-3 flex justify-between items-center animate-in fade-in slide-in-from-top-2">
           <span className="text-sm text-red-800 font-medium">{selectedIds.length} anggota terpilih</span>
           <div className="flex gap-2 items-center">
-            <span className="text-xs text-gray-500 mr-2">Ubah Status Menjadi:</span>
+            <span className="text-xs text-gray-500 mr-2">Aksi:</span>
             <button disabled={isUpdating} onClick={() => handleBulkUpdate('aktif')} className="px-3 py-1 bg-green-600 text-white text-xs font-medium rounded hover:bg-green-700 disabled:opacity-50">Aktif</button>
             <button disabled={isUpdating} onClick={() => handleBulkUpdate('purna')} className="px-3 py-1 bg-yellow-600 text-white text-xs font-medium rounded hover:bg-yellow-700 disabled:opacity-50">Purna</button>
-            <button disabled={isUpdating} onClick={() => handleBulkUpdate('keluar')} className="px-3 py-1 bg-red-600 text-white text-xs font-medium rounded hover:bg-red-700 disabled:opacity-50">Keluar</button>
+            <button disabled={isUpdating} onClick={() => handleBulkUpdate('keluar')} className="px-3 py-1 bg-gray-600 text-white text-xs font-medium rounded hover:bg-gray-700 disabled:opacity-50">Keluar</button>
+            <div className="w-px h-4 bg-red-200 mx-1"></div>
+            <button disabled={isUpdating} onClick={handleBulkDelete} className="px-3 py-1 bg-red-600 text-white text-xs font-medium rounded hover:bg-red-700 disabled:opacity-50 flex items-center gap-1"><Trash2 className="w-3 h-3"/> Hapus</button>
           </div>
         </div>
       )}
