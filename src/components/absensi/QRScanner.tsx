@@ -13,9 +13,64 @@ export default function QRScanner() {
   const [loading, setLoading] = useState(false)
   const scannerRef = useRef<Html5Qrcode | null>(null)
 
+  const isProcessingRef = useRef(false)
+
   useEffect(() => {
     let html5QrCode: Html5Qrcode;
     let isMounted = true;
+
+    const onScanSuccess = async (decodedText: string) => {
+      // Cegah pemindaian berulang berkat closure
+      if (isProcessingRef.current) return
+      isProcessingRef.current = true
+      
+      setLoading(true)
+
+      try {
+        let activityId = null
+        let token = null
+
+        // Cek apakah format berupa URL (Update terbaru) atau JSON (Format lama)
+        if (decodedText.includes('activityId=') && decodedText.includes('token=')) {
+          // Parsing URL
+          const urlParams = new URL(decodedText).searchParams
+          activityId = urlParams.get('activityId')
+          token = urlParams.get('token')
+        } else {
+          // Parsing JSON lama
+          const payload = JSON.parse(decodedText)
+          activityId = payload.activityId
+          token = payload.token
+        }
+        
+        if (!activityId || !token) {
+          throw new Error('Format QR Code tidak dikenali sistem.')
+        }
+
+        // Panggil server action
+        const result = await scanQrCheckIn(activityId, token)
+        
+        if (result.error) {
+          setError(result.error)
+          isProcessingRef.current = false // Buka kunci agar bisa scan ulang jika error
+        } else {
+          setScanResult('Berhasil Check-In! Kehadiran Anda telah tercatat.')
+          // Matikan kamera
+          if (scannerRef.current) {
+            scannerRef.current.stop().catch(() => {})
+          }
+          setTimeout(() => {
+            router.push('/dashboard/absensi')
+            router.refresh()
+          }, 3000)
+        }
+      } catch (err: any) {
+        setError(err.message || 'Gagal memproses QR Code.')
+        isProcessingRef.current = false
+      } finally {
+        setLoading(false)
+      }
+    }
 
     const startScanner = async () => {
       // Jeda sejenak untuk menghindari race condition di Strict Mode
@@ -37,7 +92,7 @@ export default function QRScanner() {
             qrbox: { width: 250, height: 250 }
           },
           onScanSuccess,
-          onScanFailure
+          (err) => {} // Abaikan error frame kosong
         )
       } catch (err) {
         if (isMounted) {
@@ -64,51 +119,7 @@ export default function QRScanner() {
       const reader = document.getElementById('reader')
       if (reader) reader.innerHTML = ''
     }
-  }, [])
-
-  const onScanSuccess = async (decodedText: string) => {
-    // Mencegah pemindaian ganda jika sedang loading
-    if (loading || scanResult) return
-
-    setLoading(true)
-    
-    // Matikan kamera agar tidak terus men-scan
-    if (scannerRef.current) {
-      scannerRef.current.clear()
-    }
-
-    try {
-      // Dekode payload JSON dari QR
-      // Format yang kita buat: { "activityId": "...", "token": "..." }
-      const payload = JSON.parse(decodedText)
-      
-      if (!payload.activityId || !payload.token) {
-        throw new Error('Format QR Code tidak dikenali sistem.')
-      }
-
-      // Panggil server action
-      const result = await scanQrCheckIn(payload.activityId, payload.token)
-      
-      if (result.error) {
-        setError(result.error)
-      } else {
-        setScanResult('Berhasil Check-In! Kehadiran Anda telah tercatat.')
-        // Arahkan kembali ke halaman absensi setelah beberapa detik
-        setTimeout(() => {
-          router.push('/dashboard/absensi')
-          router.refresh()
-        }, 3000)
-      }
-    } catch (err: any) {
-      setError(err.message || 'Gagal memproses QR Code.')
-    } finally {
-      setLoading(false)
-    }
-  }
-
-  const onScanFailure = (err: any) => {
-    // Abaikan error pemindaian latar belakang
-  }
+  }, [router])
 
   return (
     <div className="flex flex-col items-center justify-center w-full max-w-md mx-auto">
