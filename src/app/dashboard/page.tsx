@@ -10,23 +10,39 @@ import DeleteAnnouncementButton from '@/components/dashboard/DeleteAnnouncementB
 export default async function DashboardHome() {
   const session = await getSession()
   
-  // 1. Ambil Total Anggota Aktif
-  const totalAnggota = await prisma.user.count({ where: { status: 'active' } })
-  
-  // 2. Ambil Kegiatan Mendatang
-  const kegiatanMendatang = await prisma.activity.findMany({
-    where: { status: 'UPCOMING' },
-    orderBy: { date: 'asc' },
-    take: 3
-  })
+  // Ambil data secara paralel (Concurrent fetching) untuk mempercepat loading
+  const [
+    totalAnggota,
+    kegiatanMendatang,
+    myAttendances,
+    user,
+    announcements,
+    transactions
+  ] = await Promise.all([
+    prisma.user.count({ where: { status: 'aktif' } }), // Fix status 'aktif'
+    prisma.activity.findMany({
+      where: { status: 'UPCOMING' },
+      orderBy: { date: 'asc' },
+      take: 3
+    }),
+    prisma.attendance.findMany({
+      where: { userId: session?.userId }
+    }),
+    prisma.user.findUnique({
+      where: { id: session?.userId }
+    }),
+    prisma.announcement.findMany({
+      orderBy: { createdAt: 'desc' },
+      take: 5
+    }),
+    (session?.role === 'admin' || session?.role === 'pengurus') 
+      ? prisma.transaction.groupBy({ by: ['type'], _sum: { amount: true } })
+      : Promise.resolve([])
+  ])
 
-  // 3. Kalkulasi Saldo Kas
+  // Kalkulasi Saldo Kas
   let saldo = 0
-  if (session?.role === 'admin' || session?.role === 'pengurus') {
-    const transactions = await prisma.transaction.groupBy({
-      by: ['type'],
-      _sum: { amount: true }
-    })
+  if (transactions.length > 0) {
     let income = 0, expense = 0
     transactions.forEach(t => {
       if (t.type === 'INCOME') income = Number(t._sum.amount || 0)
@@ -35,23 +51,11 @@ export default async function DashboardHome() {
     saldo = income - expense
   }
 
-  // 4. Status Kehadiran Pribadi (Persentase)
-  const myAttendances = await prisma.attendance.findMany({
-    where: { userId: session?.userId }
-  })
+  // Status Kehadiran Pribadi (Persentase)
   const totalHadir = myAttendances.filter(a => a.status === 'HADIR').length
   const attendancePercentage = myAttendances.length > 0 
     ? Math.round((totalHadir / myAttendances.length) * 100) 
     : 0
-
-  const user = await prisma.user.findUnique({
-    where: { id: session?.userId }
-  })
-
-  const announcements = await prisma.announcement.findMany({
-    orderBy: { createdAt: 'desc' },
-    take: 5
-  })
 
   return (
     <div className="space-y-6">
