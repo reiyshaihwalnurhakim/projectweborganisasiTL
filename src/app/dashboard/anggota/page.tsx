@@ -5,11 +5,11 @@ import { Search } from 'lucide-react'
 import AnggotaHeader from '@/components/anggota/AnggotaHeader'
 import AnggotaTable from '@/components/anggota/AnggotaTable'
 
-export default async function AnggotaPage({ searchParams }: { searchParams: { q?: string } }) {
+export default async function AnggotaPage({ searchParams }: { searchParams: Promise<{ q?: string }> }) {
   const session = await getSession()
   const isAdmin = session?.role === 'admin'
 
-  const query = searchParams?.q || ''
+  const params = await searchParams; const query = params?.q || ''
   const members = await getMembers(query)
 
   return (
