@@ -1,15 +1,16 @@
-import QRScanner from '@/components/absensi/QRScanner'
 import { getSession } from '@/lib/auth/session'
 import { redirect } from 'next/navigation'
 import { scanQrCheckIn } from '@/actions/qr.actions'
-import { CheckCircle, XCircle } from 'lucide-react'
+import { CheckCircle, XCircle, Smartphone, ArrowLeft } from 'lucide-react'
 import Link from 'next/link'
 
-export default async function ScanPage({ searchParams }: { searchParams: { activityId?: string, token?: string } }) {
+export default async function ScanPage(props: { searchParams: Promise<{ activityId?: string, token?: string }> }) {
   const session = await getSession()
   if (!session) redirect('/login')
 
-  const { activityId, token } = searchParams
+  const searchParams = await props.searchParams
+  const activityId = searchParams?.activityId
+  const token = searchParams?.token
   let autoProcessResult = null
 
   if (activityId && token) {
@@ -17,37 +18,80 @@ export default async function ScanPage({ searchParams }: { searchParams: { activ
   }
 
   return (
-    <div className="min-h-[80vh] flex flex-col items-center justify-center py-10 px-4">
-       <div className="text-center mb-8">
-         <h1 className="text-3xl font-bold text-gray-900">Scan Kehadiran</h1>
-         <p className="text-gray-500 mt-2 max-w-sm mx-auto">Izinkan akses kamera dan arahkan lensa ke QR Code yang ditampilkan oleh panitia kegiatan.</p>
-       </div>
-       
-       {autoProcessResult ? (
-         <div className="bg-white border border-gray-100 rounded-xl p-8 text-center shadow-sm w-full max-w-md">
-           {autoProcessResult.error ? (
-             <>
-               <XCircle className="w-12 h-12 text-red-500 mx-auto mb-4" />
-               <h2 className="text-xl font-bold text-gray-900 mb-2">Gagal Check-In</h2>
-               <p className="text-red-600 mb-6">{autoProcessResult.error}</p>
-               <Link href="/dashboard/absensi/scan" className="bg-red-600 text-white px-6 py-2 rounded-lg font-medium hover:bg-red-700">
-                 Coba Scan Lagi
-               </Link>
-             </>
-           ) : (
-             <>
-               <CheckCircle className="w-12 h-12 text-green-500 mx-auto mb-4" />
-               <h2 className="text-xl font-bold text-gray-900 mb-2">Berhasil Check-In!</h2>
-               <p className="text-green-700 mb-6">Kehadiran Anda telah tercatat dalam sistem.</p>
-               <Link href="/dashboard/absensi" className="bg-gray-100 text-gray-700 px-6 py-2 rounded-lg font-medium hover:bg-gray-200">
-                 Kembali ke Riwayat
-               </Link>
-             </>
-           )}
-         </div>
-       ) : (
-         <QRScanner />
-       )}
+    <div className="min-h-[75vh] flex flex-col items-center justify-center py-8 px-4">
+      {autoProcessResult ? (
+        <div className="bg-white border border-gray-100 rounded-2xl p-8 text-center shadow-sm w-full max-w-md animate-in fade-in duration-200">
+          {autoProcessResult.error ? (
+            <>
+              <div className="w-16 h-16 bg-red-50 text-red-600 rounded-full flex items-center justify-center mx-auto mb-4 border border-red-100">
+                <XCircle className="w-8 h-8" />
+              </div>
+              <h2 className="text-xl font-bold text-gray-900 mb-2">Gagal Check-In</h2>
+              <p className="text-sm text-red-600 mb-6 bg-red-50 p-3 rounded-lg border border-red-100">
+                {autoProcessResult.error}
+              </p>
+              <Link
+                href="/dashboard/absensi"
+                className="inline-flex items-center justify-center gap-2 w-full bg-red-600 text-white px-5 py-2.5 rounded-xl font-medium hover:bg-red-700 transition-colors"
+              >
+                Kembali ke Presensi
+              </Link>
+            </>
+          ) : (
+            <>
+              <div className="w-16 h-16 bg-green-50 text-green-600 rounded-full flex items-center justify-center mx-auto mb-4 border border-green-100">
+                <CheckCircle className="w-8 h-8" />
+              </div>
+              <h2 className="text-xl font-bold text-gray-900 mb-2">Berhasil Check-In!</h2>
+              <p className="text-sm text-gray-600 mb-6">
+                Kehadiran Anda telah sukses tercatat dalam sistem organisasi.
+              </p>
+              <Link
+                href="/dashboard/absensi"
+                className="inline-flex items-center justify-center gap-2 w-full bg-gray-900 text-white px-5 py-2.5 rounded-xl font-medium hover:bg-black transition-colors"
+              >
+                Lihat Riwayat Presensi
+              </Link>
+            </>
+          )}
+        </div>
+      ) : (
+        <div className="bg-white border border-gray-100 rounded-2xl p-8 shadow-sm w-full max-w-md text-center space-y-6">
+          <div className="w-16 h-16 bg-red-50 text-red-600 rounded-2xl flex items-center justify-center mx-auto border border-red-100">
+            <Smartphone className="w-8 h-8" />
+          </div>
+
+          <div>
+            <h1 className="text-2xl font-bold text-gray-900">Presensi via QR Code</h1>
+            <p className="text-sm text-gray-500 mt-1">
+              Gunakan kamera ponsel bawaan atau Google Lens untuk memindai kode kegiatan secara instan.
+            </p>
+          </div>
+
+          <div className="text-left bg-gray-50 rounded-xl p-4 space-y-3 text-sm text-gray-700 border border-gray-100">
+            <div className="flex gap-3">
+              <span className="w-5 h-5 rounded-full bg-red-600 text-white text-xs font-bold flex items-center justify-center shrink-0 mt-0.5">1</span>
+              <p>Pastikan Anda sudah login di browser ponsel Anda.</p>
+            </div>
+            <div className="flex gap-3">
+              <span className="w-5 h-5 rounded-full bg-red-600 text-white text-xs font-bold flex items-center justify-center shrink-0 mt-0.5">2</span>
+              <p>Buka aplikasi <strong>Kamera Bawaan HP</strong> atau <strong>Google Lens</strong>.</p>
+            </div>
+            <div className="flex gap-3">
+              <span className="w-5 h-5 rounded-full bg-red-600 text-white text-xs font-bold flex items-center justify-center shrink-0 mt-0.5">3</span>
+              <p>Arahkan kamera ke QR Code kegiatan, lalu klik tautan notifikasi yang muncul di layar.</p>
+            </div>
+          </div>
+
+          <Link
+            href="/dashboard/absensi"
+            className="inline-flex items-center justify-center gap-2 w-full bg-gray-100 hover:bg-gray-200 text-gray-700 px-4 py-2.5 rounded-xl text-sm font-medium transition-colors"
+          >
+            <ArrowLeft className="w-4 h-4" />
+            Kembali ke Halaman Absensi
+          </Link>
+        </div>
+      )}
     </div>
   )
 }

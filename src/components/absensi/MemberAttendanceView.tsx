@@ -16,10 +16,10 @@ export default function MemberAttendanceView({ ongoingActivities, history }: { o
       <div className="bg-red-600 text-white rounded-2xl p-6 shadow-sm flex flex-col sm:flex-row items-center justify-between gap-6">
          <div>
             <h2 className="text-xl font-bold mb-2">Absensi Cepat via QR Code</h2>
-            <p className="text-red-100 text-sm max-w-md">Kini Anda bisa melakukan check-in instan dengan men-scan QR Code yang ditampilkan di layar proyektor kegiatan.</p>
+            <p className="text-red-100 text-sm max-w-md">Kini Anda bisa langsung check-in instan dengan mengarahkan kamera ponsel atau Google Lens ke QR Code kegiatan.</p>
          </div>
          <Link href="/dashboard/absensi/scan" className="bg-white text-red-600 px-6 py-3 rounded-xl font-bold flex items-center gap-2 hover:bg-red-50 transition-colors shrink-0 shadow-sm">
-            <QrCode className="w-5 h-5" /> Buka Kamera Scanner
+            <QrCode className="w-5 h-5" /> Panduan Scan QR
          </Link>
       </div>
 

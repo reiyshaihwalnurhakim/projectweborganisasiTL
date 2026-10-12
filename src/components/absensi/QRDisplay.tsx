@@ -38,7 +38,7 @@ export default function QRDisplay({ activityId }: { activityId: string }) {
          <QRCodeSVG value={qrData} size={300} level="H" includeMargin />
       </div>
       <h3 className="text-2xl font-bold text-gray-900 mb-2">Scan untuk Absen</h3>
-      <p className="text-gray-500">Buka menu "Scan QR" di akun anggota Anda.</p>
+      <p className="text-gray-500 text-sm">Arahkan kamera ponsel atau Google Lens Anda ke QR Code ini.</p>
       
       <div className="mt-8 bg-red-50 text-red-700 px-4 py-2 rounded-full font-mono text-sm font-semibold animate-pulse">
         QR berubah dalam {timeLeft} detik
