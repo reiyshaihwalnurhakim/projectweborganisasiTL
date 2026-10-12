@@ -35,6 +35,23 @@ export default async function PengaturanPage() {
           <ProfileForm user={user} />
         </div>
       </div>
+
+      {session.role === 'admin' && (
+        <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-6 space-y-3">
+          <div>
+            <h3 className="text-base font-bold text-gray-900">Aktivitas & Log Sistem</h3>
+            <p className="text-sm text-gray-500 mt-0.5">Pantau riwayat audit log dan perubahan data oleh seluruh pengguna.</p>
+          </div>
+          <div>
+            <a
+              href="/dashboard/pengaturan/audit-log"
+              className="inline-flex items-center gap-2 px-4 py-2 bg-gray-50 hover:bg-gray-100 border border-gray-200 text-gray-700 rounded-lg text-sm font-medium transition-colors"
+            >
+              Lihat Riwayat Aktivitas (Audit Log) &rarr;
+            </a>
+          </div>
+        </div>
+      )}
     </div>
   )
 }

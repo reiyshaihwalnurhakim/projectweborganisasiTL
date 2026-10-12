@@ -10,13 +10,11 @@ import logoImg from '@/logo.png'
 
 const menuItems = [
   { name: 'Beranda', href: '/dashboard', icon: Home },
-  { name: 'Profil', href: '/dashboard/visi-misi', icon: Users },
   { name: 'Absensi', href: '/dashboard/absensi', icon: ClipboardList },
-  { name: 'Jadwal', href: '/dashboard/kegiatan', icon: Calendar },
-  { name: 'Struktur', href: '/dashboard/struktur', icon: Users },
+  { name: 'Kegiatan', href: '/dashboard/kegiatan', icon: Calendar },
   { name: 'Keuangan', href: '/dashboard/keuangan', icon: DollarSign, roles: ['admin', 'pengurus'] },
   { name: 'Anggota', href: '/dashboard/anggota', icon: UserCog },
-  { name: 'Audit Log', href: '/dashboard/pengaturan/audit-log', icon: History, roles: ['admin'] },
+  { name: 'Struktur & Profil', href: '/dashboard/struktur', icon: Users },
   { name: 'Pengaturan', href: '/dashboard/pengaturan', icon: Settings },
 ]
 
