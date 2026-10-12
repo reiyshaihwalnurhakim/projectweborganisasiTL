@@ -76,7 +76,11 @@ export async function scanQrCheckIn(activityId: string, token: string) {
       details: { method: 'QR', status: 'HADIR' }
     })
 
-    revalidatePath(`/dashboard/absensi`)
+    try {
+      revalidatePath(`/dashboard/absensi`)
+    } catch (e) {
+      // Abaikan jika dipanggil di luar konteks server action standar
+    }
     return { success: true }
   } catch (error: any) {
     return { error: error.message || 'Gagal melakukan check-in' }
